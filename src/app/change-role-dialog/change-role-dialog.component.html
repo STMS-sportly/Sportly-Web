@@ -1,0 +1,27 @@
+<div class="edit-role">
+  <div class="edit-role-content">
+    <h1>Choose role for team member: {{this.teamService.userName}}</h1>
+    <div *ngIf="this.teamService.isTeamProffesional()">
+      <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="userRoles">
+      <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role">
+        {{role}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <button mat-stroked-button color="black" (click)="changeUserRole()">Edit user role</button>
+    </div>
+    <div *ngIf="!this.teamService.isTeamProffesional()">
+      <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="userRoles">
+      <mat-radio-button class="example-radio-button" *ngFor="let role of amateurRoles" [value]="role">
+        {{role}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <button mat-stroked-button color="black" (click)="changeUserRole()">Edit user role</button>
+    </div>
+  </div>
+</div>

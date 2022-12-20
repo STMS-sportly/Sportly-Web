@@ -1,0 +1,29 @@
+<div class="create-team-component">
+  <form class="team-type" (change)="onChangeType($event)">
+    <div>
+      <br/>
+      <input
+        type="radio"
+        id="contactChoice1"
+        name="contact"
+        value="Professional"
+        />
+      <label for="contactChoice1">Professional   </label>
+      <input type="radio" id="contactChoice2" name="contact" value="Amateur"/>
+      <label for="contactChoice2">Amateur</label>
+    </div>
+  </form>
+  <input class="new-team-name" placeholder="Team Name*" required = true [(ngModel)]="team.teamName">
+  <input class="location" placeholder="Location" required = false [(ngModel)]="team.location">
+  <input class="organization-name" placeholder="Organization name" required = false [(ngModel)]="team.organizationName">
+  <select matNativeControl required class="sport-dropdown" (change)="onChangeDiscipline($event)" [(ngModel)]='this.apiService.sportsDisciplines'>
+    <option
+      *ngFor="let item of this.apiService.sportsDisciplines"
+      >
+    {{ item.name }}
+    </option>
+  </select>
+  <button class="create-team" (click)="createTeam()">Create Team</button>
+</div>
+
+

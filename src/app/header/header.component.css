@@ -1,0 +1,108 @@
+#simple-logo-header{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 190px;
+  height: 102px;
+  top: 0px;
+  border: 1px solid #FFFFFF;
+}
+
+#login-page-simple-header{
+  box-sizing: border-box;
+
+  position: absolute;
+  height: 105px;
+  top: 0px;
+
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 0;
+}
+
+#logout-btn{
+  position: absolute;
+  width: 209px;
+  height: 64px;
+  top: 19px;
+  color: #FFFFFF;
+  background: #000000;
+  border-radius: 12px;
+  float: left;
+  font: Mukta;
+  font-size: large;
+  font-weight: 100;
+}
+
+#logout-btn:hover{
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #000000;
+}
+
+#account-btn{
+  position: absolute;
+  width: 209px;
+  height: 64px;
+  top: 19px;
+  color: #FFFFFF;
+  background: #000000;
+  border-radius: 12px;
+  float: left;
+  font: Mukta;
+  font-size: large;
+  font-weight: 100;
+}
+
+#account-btn:hover{
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #000000;
+}
+
+#test-email{
+  margin-left: 50%;
+}
+
+#login-page-create-team-2{
+  box-sizing: border-box;
+  font: Mukta;
+  font-size: large;
+  font-weight: 100;
+  position: absolute;
+  width: 209px;
+  height: 64px;
+  top: 19px;
+  color: #FFFFFF;
+  background: #000000;
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+
+#login-page-create-team-2:hover{
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #000000;
+}
+
+#login-page-join-team-2{
+  box-sizing: border-box;
+  font: Mukta;
+  font-size: large;
+  width: 209px;
+  top: 19px;
+  height: 64px;
+  font-weight: 100;
+  position: absolute;
+  color: #FFFFFF;
+  background: #000000;
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+
+#login-page-join-team-2:hover{
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #000000;
+}

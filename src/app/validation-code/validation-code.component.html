@@ -1,0 +1,16 @@
+<app-header></app-header>
+<h1 id="validation-code-title">
+  Join your team via invitation code
+</h1>
+<div class="content">
+  <div class="o-c">
+    <div>
+      <div class="card">
+        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" [config]="config"></ng-otp-input>
+      </div>
+    </div>
+  </div>
+</div>
+<button id="join-team-btn" (click)="joinTeam()" [disabled]="isOtpValid == false" >
+  Join team
+</button>

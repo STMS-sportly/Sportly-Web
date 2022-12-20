@@ -1,0 +1,45 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"/>
+
+<div class="container-fluid h-15" id="login-page-simple-header">
+  <div class="row h-15"  *ngIf="user$ | async as user; else loading">
+    <div class="col-sm-2 h-15">
+      <!-- <h1 class="header-app-name" (click)="goToMainPage()">SPORTLY</h1> -->
+      <img src="./../../assets/logo-small.png" (click)="goToMainPage()">
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-2 h-15" >
+      <div *ngIf="!this.teamService.isTeamViewActive">
+        <button id="login-page-create-team-2" (click)="goToCreateTeam()">
+          Create a team
+        </button>
+      </div>
+
+    </div>
+    <div class="col-sm-2 h-15" >
+      <div *ngIf="!this.teamService.isTeamViewActive">
+        <button id="login-page-join-team-2" (click)="goToJoinTeam()">
+          Join a team
+        </button>
+      </div>
+
+    </div>
+    <div class="col-sm-2 h-15">
+      <button mat-button [matMenuTriggerFor]="menu" id="logout-btn">Menu</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item class="invite-button" (click)="goToMyAccountInfo()">My Account</button>
+        <button mat-menu-item class="leave-button" (click)="logout()">Log out</button>
+      </mat-menu>
+    </div>
+    <!-- <div class="col-sm-2 h-15">
+      <button id="account-btn" (click)="goToMyAccountInfo()">My Account</button>
+    </div>
+    <div class="col-sm-2 h-15">
+      <button id="logout-btn" (click)="logout()">Log out</button>
+    </div>
+  </div> -->
+</div>
+
+<ng-template #loading>
+  <h1>Loading...</h1>
+</ng-template>
+<ng-container *ngIf="logout$ | async"></ng-container>

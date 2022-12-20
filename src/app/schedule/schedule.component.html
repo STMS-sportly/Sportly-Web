@@ -1,0 +1,41 @@
+<!-- <ejs-schedule #scheduleObj  [views]='views' (popupClose) ='onPopupClose()' [views]='views'>
+
+</ejs-schedule> -->
+
+<ejs-schedule width='100%' height='550px' [selectedDate]='selectedDate' [views]='views' (popupClose)="onPopupClose()">
+  <ng-template #editorTemplate let-data>
+    <table class="'costum-event-editor" width="100%" cellpadding="5">
+      <tbody>
+        <tr>
+          <td class="e-textlabel">
+            Title
+          </td>
+          <td colspan="4">
+            <input id="Subject" class="e-field e-input" type="text" value="{{data.Subject}}" data-name="Subject" style="width: 100%" [(ngModel)]="this.apiService.events.title"/>
+          </td>
+        </tr>
+        <tr>
+          <td class="e-textlabel">
+            Date
+          </td>
+          <td colspan="4">
+            <ejs-datetimepicker id="StartTime"
+            class="e-field" data-name="StartTime"
+            format="M/dd/yy h:mm a"
+            [value]="data.StartTime"
+            [(ngModel)]="this.apiService.events.eventDate"
+            >
+            </ejs-datetimepicker>
+          </td>
+        </tr>
+        <tr>
+          <td class="e-textlabel">Description</td>
+          <td colspan="4">
+              <input id="Description" class="e-field e-input" data-name="Description"  style="width: 100%;"
+              [(ngModel)]="this.apiService.events.description"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</ejs-schedule>

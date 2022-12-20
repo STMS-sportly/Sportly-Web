@@ -1,0 +1,42 @@
+ <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"/>
+ <div class="main-page-background">
+  <app-header></app-header>
+  <div class="content">
+    <div class="row wrap">
+      <div fxFlex="25%" *ngFor="let team of this.apiService.teams; let i = index">
+        <mat-card class="mat-elevation-z4">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <div class="icon-background" [ngStyle]="{'background-color': this.teamService.getTeamIconBackgroundColor(i)}" (click)="goToTeamDetails(i)">
+                <div *ngIf="this.apiService.teams[i].discipline.name === 'Football'" class="icon-team">
+                  <img src="../../assets/ball.png">
+                </div>
+                <div *ngIf="this.apiService.teams[i].discipline.name === 'Basketball'">
+                  <img src="../../assets/Basketball.png">
+                </div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="tdb">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                  <button mat-menu-item class="invite-button" (click)="this.getIvitationCode(i)" *ngIf="this.teamService.isAdmin(i)">Invite</button>
+                  <button mat-menu-item class="leave-button" (click)="this.leaveTeam(i)">Leave</button>
+                </mat-menu>
+              </div>
+
+          </div>
+
+        <mat-card-header>
+          <mat-card-title>{{team.teamName}}</mat-card-title>
+          <mat-card-subtitle>{{team.membersCount}} members</mat-card-subtitle>
+        </mat-card-header>
+        </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+ </div>

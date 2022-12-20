@@ -1,1 +1,465 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-schedule/styles/material.css';
+/* @import "~bootstrap/dist/css/bootstrap.css"; */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.content {
+  display: inline-block;
+  width: 100vw;
+  /* vertical-align: top; */
+}
+
+.o-c {
+  text-align: center;
+  display: flex;
+  display: -webkit-flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .card {
+  padding: 2rem;
+  /* box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  width: 70vw;
+  height: 50vh;
+  border-radius: 6px;
+  background: white;
+  margin: 0 auto;
+  margin-top: 1vh;
+  position: relative;
+} */
+
+.Row {
+  padding-top: 10px;
+  height: 4rem;
+  display: table;
+  width: 100%; /*Optional*/
+  table-layout: fixed; /*Optional*/
+}
+.Column {
+  padding-top: 1vh;
+  padding-bottom: 1.5vh;
+  display: table-cell;
+  width: 33%;
+}
+
+.team{
+  color: black;
+  background: #FFFFFF;
+  border: 1px solid #DFDFDF;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  height: 8rem
+  /* max-height: 10rem; */
+  /* position: absolute; */
+}
+
+.team:hover{
+  color: black;
+  background: #FFFFFF;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  cursor: grab;
+}
+
+.team-name{
+  position: absolute;
+  justify-content: left;
+
+  font-family: 'Mukta';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 40px;
+
+  color: #000000;
+}
+
+.team-members{
+  display: flex;
+  justify-content: left;
+  /* margin-bottom: 2.5rem; */
+  position: relative;
+  color: #666666;
+  font-family: 'Mukta';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+  }
+
+
+  input.ng-invalid.ng-touched {
+    border: red 1px solid;
+}
+
+.icon-background{
+  width: 5vw;
+  top:1vh;
+  position: relative;
+  justify-content: center;
+}
+
+.create-team-component{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 928px;
+  height: 738px;
+  left: 26vw;
+  top: 12vh;
+
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.team-col-1{
+  box-sizing: border-box;
+
+  /* position: absolute; */
+  /* width: 450px; */
+  height: 850px;
+  /* left: 8vw; */
+  top: 14vh;
+
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  align-items: center;
+  float: left;
+}
+
+.team-col-2{
+  box-sizing: border-box;
+
+  /* position: absolute; */
+  /* width: 450px; */
+  height: 850px;
+  /* left: 38vw; */
+  top: 14vh;
+
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  align-items: center;
+  float: left;
+}
+
+.team-col-3{
+  box-sizing: border-box;
+
+  /* position: absolute; */
+  /* width: 450px; */
+  height: 738px;
+  /* left: 68vw; */
+  top: 20vh;
+
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  align-items: center;
+  float: left;
+}
+
+.main-page{
+  margin-top: 15vh;
+}
+
+.invite-button{
+  position: absolute;
+  /* width: 100px; */
+  /* height: 30px; */
+  text-align: center;
+  color: #000000;
+  /* background: #000000; */
+  /* border-radius: 12px; */
+  /* padding: 6px; */
+}
+
+.invite-button:hover{
+  /* background: #FFFFFF; */
+  color: #000000;
+  border-color: #000000;
+  cursor: pointer;
+  color: black;
+  background: #FFFFFF;
+  /* border: 1px solid black;
+  border-radius: 8px;
+  box-sizing: border-box; */
+}
+
+.leave-button{
+  /* position: absolute; */
+  /* width: 100px; */
+  /* height: 30px; */
+  text-align: center;
+  color: #000000;
+  /* background: #000000; */
+  /* border-radius: 12px;
+  padding: 6px;
+  margin-top: 4vh; */
+}
+
+.leave-button:hover{
+  /* background: #FFFFFF; */
+  color: #000000;
+  border-color: #000000;
+  cursor: pointer;
+  color: black;
+  background: #FFFFFF;
+  /* border: 1px solid black;
+  border-radius: 8px;
+  box-sizing: border-box; */
+}
+
+.mat-dialog-container{
+  padding: 0px;
+}
+
+.mat-dialog-container{
+  height: 60vh;
+  width: 60vw;
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  align-items: center;
+  color: #000000;
+}
+
+.copy-btn{
+  width: 100px;
+  height: 34px;
+  text-align: center;
+  color: #FFFFFF;
+  background: #000000;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}
+
+.copy-btn:hover{
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #000000;
+  cursor: pointer;
+  color: black;
+  background: #FFFFFF;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.icon-team{
+  justify-content: center;
+}
+
+.team-tile{
+  padding-top: 20px;
+}
+
+.team-type{
+  box-sizing: border-box;
+  font-size: large;
+  position: absolute;
+  width: 393px;
+  height: 50px;
+  /* left: 80vh; */
+  margin-left: 15vw;
+  top: 160px;
+
+  background: #FFFFFF;
+  border: 1px solid #C0C0C0;
+  border-radius: 8px;
+}
+
+.new-team-name{
+  box-sizing: border-box;
+  font-size: large;
+  position: absolute;
+  width: 393px;
+  height: 50px;
+  /* left: 80vh; */
+  margin-left: 15vw;
+  top: 240px;
+
+  background: #FFFFFF;
+  border: 1px solid #C0C0C0;
+  border-radius: 8px;
+}
+
+.organization-name{
+  box-sizing: border-box;
+  font-size: large;
+  position: absolute;
+  width: 393px;
+  height: 50px;
+  /* left: 80vh; */
+  margin-left: 15vw;
+  top: 320px;
+
+  background: #FFFFFF;
+  border: 1px solid #C0C0C0;
+  border-radius: 8px;
+}
+
+.location{
+  box-sizing: border-box;
+  font-size: large;
+  position: absolute;
+  width: 393px;
+  height: 50px;
+  /* left: 80vh; */
+  margin-left: 15vw;
+  top: 400px;
+
+  background: #FFFFFF;
+  border: 1px solid #C0C0C0;
+  border-radius: 8px;
+}
+
+.sport-dropdown{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 393px;
+  height: 50px;
+  /* left: 80vh; */
+  margin-left: 15vw;
+  top: 480px;
+
+  background: #FFFFFF;
+  border: 1px solid #C0C0C0;
+  border-radius: 8px;
+}
+
+.create-team{
+  box-sizing: border-box;
+  font: Mukta;
+  font-size: large;
+  font-weight: 100;
+  position: absolute;
+  width: 393px;
+  height: 50px;
+  /* left: 80vh; */
+  margin-left: 15vw;
+  top: 560px;
+  color: #FFFFFF;
+  background: #1F1F1F;
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+
+.create-team:hover{
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #000000;
+}
+
+.example-card {
+  min-width: 100%;
+  margin: 40px;
+}
+.cards {
+  width: 320px;
+  height: 320px;
+  color: #1F1F1F;
+}
+
+.mat-card{
+  color: black;
+  background: #FFFFFF;
+  border: 1px solid #DFDFDF;
+  border-radius: 8px;
+  top: 12vh;
+  /* left: 15vw; */
+  /* right: 15vw; */
+  width: 12vw;
+}
+
+.mat-card:hover{
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #000000;
+}
+
+
+.mat-card-title {
+  margin-top: 20px;
+  font: Mukta;
+  font-size: xx-large;
+  font-weight: 100;
+  color: #000000;
+}
+
+
+.main-page-background{
+  background-color: #FAF9F6;
+  height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.mat-card-subtitle{
+  color:#666666
+}
+
+.tdb{
+  left: 1vw;
+}
+
+html, body { height: 100%; }
+
+.mat-card.mat-card.mat-focus-indicator.mat-elevation-z4 {
+  margin-left: 7vw;
+}
+
+.header-app-name{
+  font-size: 128px;
+  top: 50%;
+  left: 50%;
+  cursor: pointer;
+}
+
+.mat-card.mat-card.mat-focus-indicator.mat-elevation-z4 {
+  margin-top: 4vh;
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
+
+.mat-mdc-card {
+  position: relative;
+  border-radius: var(--mdc-elevated-card-container-shape, var(--mdc-shape-medium, 4px));
+  background-color: var(--mdc-elevated-card-container-color, transparent);
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--mdc-elevated-card-container-color, transparent);
+  margin-left: 150px;
+  margin-top: 150px;
+  height: 18vh;
+}
+
+.mat-mdc-tab-group.mat-warn .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-group.mat-warn .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-nav-bar.mat-warn .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-nav-bar.mat-warn .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
+  border-color: #1F1F1F;
+}

@@ -1,0 +1,17 @@
+.edit-team{
+  height: 40vh;
+  width: 30vw;
+}
+
+.edit-team-content{
+  margin-top: 10vh;
+  margin-left:8vw;
+}
+
+.mat-mdc-form-field {
+  --mat-mdc-form-field-floating-label-scale: 0.75;
+  display: inline-flex;
+  flex-direction: column;
+  width: 15vw;
+  text-align: center;
+}
