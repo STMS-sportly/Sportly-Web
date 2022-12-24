@@ -1,3 +1,14 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-
+.mat-mdc-form-field {
+  --mat-mdc-form-field-floating-label-scale: 0.75;
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 400px;
+  text-align: left;
+}
 

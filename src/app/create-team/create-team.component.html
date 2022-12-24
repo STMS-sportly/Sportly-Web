@@ -1,29 +1,33 @@
 <div class="create-team-component">
-  <form class="team-type" (change)="onChangeType($event)">
-    <div>
-      <br/>
-      <input
-        type="radio"
-        id="contactChoice1"
-        name="contact"
-        value="Professional"
-        />
-      <label for="contactChoice1">Professional   </label>
-      <input type="radio" id="contactChoice2" name="contact" value="Amateur"/>
-      <label for="contactChoice2">Amateur</label>
-    </div>
-  </form>
-  <input class="new-team-name" placeholder="Team Name*" required = true [(ngModel)]="team.teamName">
-  <input class="location" placeholder="Location" required = false [(ngModel)]="team.location">
-  <input class="organization-name" placeholder="Organization name" required = false [(ngModel)]="team.organizationName">
-  <select matNativeControl required class="sport-dropdown" (change)="onChangeDiscipline($event)" [(ngModel)]='this.apiService.sportsDisciplines'>
-    <option
-      *ngFor="let item of this.apiService.sportsDisciplines"
-      >
-    {{ item.name }}
-    </option>
-  </select>
-  <button class="create-team" (click)="createTeam()">Create Team</button>
+  <mat-radio-group aria-label="Select team type" (change)="onChangeType($event)">
+    <mat-radio-button value="Professional">Proffesional</mat-radio-button>
+    <mat-radio-button value="Amateur">Amateur</mat-radio-button>
+  </mat-radio-group>
+  <br><br>
+  <mat-form-field appearance="fill">
+    <mat-label>Team name</mat-label>
+    <input matInput [(ngModel)]="team.teamName">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" >
+    <mat-label>Sport discipline</mat-label>
+    <mat-select (selectionChange)="onChangeDiscipline($event)">
+      <mat-option value={{item.name}} *ngFor="let item of this.apiService.sportsDisciplines">{{ item.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Organization name</mat-label>
+    <input matInput [(ngModel)]="team.organizationName">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Location</mat-label>
+    <input matInput [(ngModel)]="team.location">
+  </mat-form-field>
+  <br>
+  <button mat-stroked-button color="black" disabled={{createTeamDisabled}} (click)="createTeam()">Create team</button>
 </div>
+
 
 

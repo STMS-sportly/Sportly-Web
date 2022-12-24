@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { TeamDetailsDTO, TeamDTO } from 'src/app/models/team';
@@ -16,7 +16,8 @@ interface User {
 export class ApiService {
 
   API_URL = 'https://sportly-stms.azurewebsites.net';
-  public events:  EventDTO = {} as EventDTO;
+  public event: EventDTO = {} as EventDTO;
+  public teamEvents: EventDTO[] = [];
   public teams: TeamDTO[] = [];
   public teamDetails: TeamDetailsDTO = {
     teamName: '',
@@ -40,7 +41,6 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   public getTeams(token: string): void{
-    const content_ = JSON.stringify(token);
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', "application/json").set('idToken', token);
 
@@ -148,6 +148,30 @@ export class ApiService {
     this.http.post(`${this.API_URL}/schedule/CreateEvent/` + teamId, {"eventDate": eventDate, "title": title, "description": description}, {headers: headers} )
     .subscribe((res) => {
       console.log(res);
-  });
+    });
+  }
+
+  getMonthEvents(teamId: number,token: string): void {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', "application/json").set('idToken', token);
+    let params = new HttpParams();
+    params = params.append('date', new Date().toDateString());
+    this.http.get(`${this.API_URL}/schedule/GetMonthEvents/` + teamId, {headers: headers, params: params})
+    .subscribe((res: any) => {
+      this.teamEvents = res.events;
+      console.log(res);
+      console.log(this.teamEvents)
+    });
+  }
+
+  getDayEvents(teamId: number,token: string): void {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', "application/json").set('idToken', token);
+    let params = new HttpParams();
+    params = params.append('date', new Date().toDateString());
+    this.http.get(`${this.API_URL}/schedule/GetDayEvents/` + teamId, {headers: headers, params: params})
+    .subscribe((res) => {
+      console.log(res);
+    });
   }
 }

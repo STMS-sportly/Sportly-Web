@@ -4,4 +4,9 @@ export interface EventDTO {
   description: string
 }
 
-// export interface
+export interface Event {
+  id: number,
+  eventDate: string,
+  title: string,
+  description: string
+}

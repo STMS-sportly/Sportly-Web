@@ -13,9 +13,7 @@ import { TeamService } from '../services/teams/team.service';
 })
 export class EditTeamInfoComponent implements OnInit{
 
-  newTeamName: string = '';
-  newOrgName: string = '';
-  newLocation: string = '';
+  editTeamDisabled = false;
 
   constructor(
     public readonly teamService: TeamService,
@@ -29,13 +27,28 @@ export class EditTeamInfoComponent implements OnInit{
     this.apiService.getTeamDetails(this.apiService.teamDetails.id, userToken!);
   }
 
-  onChangeName(event: any) {this.newTeamName = event.target.value;}
-  onChangeOrg(event: any) {this.newOrgName = event.target.value;}
-  onChangeLocation(event: any) {this.newLocation = event.target.value;}
+  validateDate(): void {
+    if(this.apiService.teamDetails.teamName.length < 1){
+      this.editTeamDisabled = true;
+    } else {
+      this.editTeamDisabled = true;
+    }
+  }
+
+  onChangeName(event: any) {
+    this.apiService.teamDetails.teamName = event.target.value;
+    this.validateDate();
+  }
+  onChangeOrg(event: any) {this.apiService.teamDetails.organizationName = event.target.value;}
+  onChangeLocation(event: any) {this.apiService.teamDetails.location = event.target.value;}
 
   async editTeam(): Promise<void> {
     const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
-    this.apiService.updateTeam(this.apiService.teamDetails.id, this.newTeamName, this.newLocation, this.newOrgName, userToken!)
+    this.apiService.updateTeam(this.apiService.teamDetails.id,
+                              this.apiService.teamDetails.teamName,
+                              this.apiService.teamDetails.location!,
+                              this.apiService.teamDetails.organizationName!,
+                              userToken!);
     this.dialogRef.closeAll();
     this.apiService.getTeamDetails(this.apiService.teamDetails.id, userToken!);
   }

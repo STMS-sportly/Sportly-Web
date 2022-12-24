@@ -1,41 +1,17 @@
-<!-- <ejs-schedule #scheduleObj  [views]='views' (popupClose) ='onPopupClose()' [views]='views'>
+<mbsc-eventcalendar [data]="this.apiService.teamEvents" [options]="calendarOptions" [(selectedDate)]="calendarSelectedDate">
+</mbsc-eventcalendar>
+<mbsc-popup [options]="popupOptions" [anchor]="popupAnchor" [buttons]="popupButtons" [headerText]="popupHeaderText" #popup>
+    <div class="mbsc-form-group">
+        <mbsc-input label="Title" [(ngModel)]="popupEventTitle"></mbsc-input>
+        <mbsc-textarea label="Description" [(ngModel)]="popupEventDescription"></mbsc-textarea>
+        <mbsc-datepicker [(ngModel)]="popupEventDates" [options]="datePickerOptions" [controls]="popupEventAllDay ? datePickerControls : datetimePickerControls" [responsive]="popupEventAllDay ? datePickerResponsive : datetimePickerResponsive" [startInput]="startInput"></mbsc-datepicker>
+        <mbsc-input #startInput label="Date"></mbsc-input>
+        <mbsc-time label="Time"></mbsc-time>
+        <!-- <mbsc-input #endInput label="Ends"></mbsc-input> -->
 
-</ejs-schedule> -->
-
-<ejs-schedule width='100%' height='550px' [selectedDate]='selectedDate' [views]='views' (popupClose)="onPopupClose()">
-  <ng-template #editorTemplate let-data>
-    <table class="'costum-event-editor" width="100%" cellpadding="5">
-      <tbody>
-        <tr>
-          <td class="e-textlabel">
-            Title
-          </td>
-          <td colspan="4">
-            <input id="Subject" class="e-field e-input" type="text" value="{{data.Subject}}" data-name="Subject" style="width: 100%" [(ngModel)]="this.apiService.events.title"/>
-          </td>
-        </tr>
-        <tr>
-          <td class="e-textlabel">
-            Date
-          </td>
-          <td colspan="4">
-            <ejs-datetimepicker id="StartTime"
-            class="e-field" data-name="StartTime"
-            format="M/dd/yy h:mm a"
-            [value]="data.StartTime"
-            [(ngModel)]="this.apiService.events.eventDate"
-            >
-            </ejs-datetimepicker>
-          </td>
-        </tr>
-        <tr>
-          <td class="e-textlabel">Description</td>
-          <td colspan="4">
-              <input id="Description" class="e-field e-input" data-name="Description"  style="width: 100%;"
-              [(ngModel)]="this.apiService.events.description"/>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </ng-template>
-</ejs-schedule>
+        <div *ngIf="isEdit" class="mbsc-button-group">
+            <mbsc-button class="mbsc-button-block" color="danger" variant="outline" (click)="onDeleteClick()">Delete event
+            </mbsc-button>
+        </div>
+    </div>
+</mbsc-popup>

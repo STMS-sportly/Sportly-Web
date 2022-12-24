@@ -63,6 +63,7 @@ export class MainPageComponent implements OnInit{
     this.apiService.getTeamDetails(teamId, userToken!);
     console.log(this.apiService.teamDetails);
     this.router.navigateByUrl('team?id=' + teamId);
+    this.apiService.getMonthEvents(teamId, userToken!);
     this.teamService.isTeamViewActive = true;
   }
 

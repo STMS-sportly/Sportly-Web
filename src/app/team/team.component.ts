@@ -14,7 +14,7 @@ import { ChangeRoleDialogComponent } from '../change-role-dialog/change-role-dia
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.css']
 })
-export class TeamComponent implements OnDestroy {
+export class TeamComponent implements OnInit ,OnDestroy {
 
   constructor(
     public apiService: ApiService,
@@ -22,6 +22,10 @@ export class TeamComponent implements OnDestroy {
     private readonly router: Router,
     public dialog: MatDialog,
   ) { }
+
+  async ngOnInit(): Promise<void> {
+    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
+  }
 
   ngOnDestroy(): void {
     this.teamService.isTeamViewActive = false;

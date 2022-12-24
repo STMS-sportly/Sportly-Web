@@ -12,19 +12,17 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CreateTeamComponent implements OnInit {
 
-  team: TeamDTO =
-    {
-      id: -1,
-      teamType: "",
-      teamName: "",
-      organizationName: "",
-      location: "",
-      discipline: {name: ""},
-      membersCount: -1,
-      role: ""
-    }
-
-    isTeamDataValid: boolean = true;
+  createTeamDisabled = false
+  team: TeamDTO =     {
+    id: -1,
+    teamType: "",
+    teamName: "",
+    organizationName: "",
+    location: "",
+    discipline: {name: ""},
+    membersCount: -1,
+    role: ""
+  }
 
   constructor(
     public apiService: ApiService,
@@ -38,32 +36,27 @@ export class CreateTeamComponent implements OnInit {
   }
 
   validateData(): void {
-    if(this.team.teamName.length === 0
-      || this.team.teamType.length === 0){
-      this.isTeamDataValid = false;
+    if(this.team.teamName.length < 1
+      || this.team.teamType.length < 1){
+      this.createTeamDisabled = true;
     } else {
-      this.isTeamDataValid = true;
+      this.createTeamDisabled = false;
     }
   }
 
   onChangeType(event: any) {
-    this.team.teamType = event.target.value;
+    this.team.teamType = event.value;
  }
 
- onChangeDiscipline(event: any) {
-  this.team.discipline.name = event.target.value;
-}
+  onChangeDiscipline(event: any) {
+    this.team.discipline.name = event.value;
+  }
 
   async createTeam(): Promise<void> {
     const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
     this.validateData();
-    if(this.isTeamDataValid){
-      this.apiService.createTeam(this.team, userToken!);
-    } else {
-      console.log("INVALID DATA");
-    }
+    this.apiService.createTeam(this.team, userToken!);
     this.dialogRef.closeAll();
     this.apiService.getTeams(userToken!);
-
   }
 }

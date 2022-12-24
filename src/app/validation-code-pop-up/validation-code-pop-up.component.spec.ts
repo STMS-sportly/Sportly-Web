@@ -1,4 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ValidationCodePopUpComponent } from './validation-code-pop-up.component';
 
@@ -8,6 +11,10 @@ describe('ValidationCodePopUpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        HttpClientModule,
+        MatDialogModule],
       declarations: [ ValidationCodePopUpComponent ]
     })
     .compileComponents();

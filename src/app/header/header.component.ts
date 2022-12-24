@@ -10,6 +10,7 @@ import firebase from 'firebase/compat/app';
 import { CreateTeamComponent } from '../create-team/create-team.component';
 import { ApiService } from '../services/api/api.service';
 import { MatDialog } from '@angular/material/dialog';
+import { ValidationCodeComponent } from '../validation-code/validation-code.component';
 
 @Component({
   selector: 'app-header',
@@ -40,14 +41,15 @@ export class HeaderComponent{
   async goToCreateTeam(): Promise<void> {
     const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
     this.apiService.getDisciplines(userToken!);
-    this.router.navigateByUrl('createTeamPage');
-    // this.dialog.open(CreateTeamComponent);
+    this.dialog.open(CreateTeamComponent,{
+      height: '600px',
+      width: '700px',
+    });
     console.log(this.apiService.teams);
   }
 
   goToJoinTeam(): void {
-    this.router.navigateByUrl('validationCode');
-    // this.dialogRef.open(ValidationCodeComponent);
+    this.dialog.open(ValidationCodeComponent);
   }
 
   goToMyAccountInfo(): void {

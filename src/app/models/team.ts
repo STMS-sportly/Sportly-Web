@@ -11,6 +11,8 @@ export interface TeamDTO {
   role: string
 }
 
+
+
 export interface TeamDetailsDTO {
   teamName: string,
   organizationName?: string,

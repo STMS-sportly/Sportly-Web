@@ -1,3 +1,4 @@
+import { MbscModule } from '@mobiscroll/angular';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatMenuModule} from '@angular/material/menu';
@@ -28,7 +29,6 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { UsersTeamsComponent } from './users-teams/users-teams.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { TeamComponent } from './team/team.component';
-import { TeamScheduleComponent } from './schedule/schedule.component';
 import { ChatComponent } from './chat/chat.component';
 import { AppFirebaseModule } from './app-firebase/app-firebase.module';
 import { NewEventDialogComponent } from './new-event-dialog/new-event-dialog.component';
@@ -41,9 +41,9 @@ import { ChangeRoleDialogComponent } from './change-role-dialog/change-role-dial
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { TeamScheduleComponent } from './schedule/schedule.component';
 import { environment } from 'src/environments/environment';
-
-
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -63,6 +63,7 @@ import { environment } from 'src/environments/environment';
     ChangeRoleDialogComponent,
   ],
   imports: [
+    MbscModule,
     BrowserModule,
     AppRoutingModule,
     AppFirebaseModule,
@@ -81,16 +82,12 @@ import { environment } from 'src/environments/environment';
     MatPaginatorModule,
     MatRadioModule,
     CommonModule,
-    FlatpickrModule.forRoot(),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
     NgbModalModule,
     MatDividerModule,
     MatTabsModule,
     MatTreeModule,
     ScheduleModule,
+    MatChipsModule,
     DateTimePickerModule
   ],
   exports:[MatMenuModule],
