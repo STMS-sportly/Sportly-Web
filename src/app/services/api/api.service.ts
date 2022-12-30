@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TeamDetailsDTO, TeamDTO } from 'src/app/models/team';
 import { InvitationCode } from 'src/app/models/invitation-code';
-import { EventDTO } from 'src/app/models/event';
+import { EventDTO, TeamEvent } from 'src/app/models/event';
 
 interface User {
   token: string
@@ -16,8 +16,9 @@ interface User {
 export class ApiService {
 
   API_URL = 'https://sportly-stms.azurewebsites.net';
+
   public event: EventDTO = {} as EventDTO;
-  public teamEvents: EventDTO[] = [];
+  public teamEvents: TeamEvent[] = [];
   public teams: TeamDTO[] = [];
   public teamDetails: TeamDetailsDTO = {
     teamName: '',
@@ -164,12 +165,35 @@ export class ApiService {
     });
   }
 
-  getDayEvents(teamId: number,token: string): void {
+  getDayEvents(teamId: number, token: string): void {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', "application/json").set('idToken', token);
     let params = new HttpParams();
     params = params.append('date', new Date().toDateString());
     this.http.get(`${this.API_URL}/schedule/GetDayEvents/` + teamId, {headers: headers, params: params})
+    .subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  deleteEvent(teamId: number, eventId: number, token: string): void {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', "application/json").set('idToken', token);
+    this.http.delete(`${this.API_URL}/schedule/RemoveEvent/` + teamId + `/` + eventId, {headers: headers})
+    .subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  updateEvent(teamId: number, eventId: number, updatedEvent: EventDTO, token: string): void {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', "application/json").set('idToken', token);
+    this.http.put(`${this.API_URL}/schedule/UpdateEvent/` + teamId + `/` + eventId, {
+      "date": updatedEvent.eventDate,
+      "title": updatedEvent.title,
+      "description": updatedEvent.description
+  },
+   {headers: headers})
     .subscribe((res) => {
       console.log(res);
     });

@@ -31,7 +31,7 @@ export class EditTeamInfoComponent implements OnInit{
     if(this.apiService.teamDetails.teamName.length < 1){
       this.editTeamDisabled = true;
     } else {
-      this.editTeamDisabled = true;
+      this.editTeamDisabled = false;
     }
   }
 

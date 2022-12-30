@@ -8,6 +8,7 @@ import { EditTeamInfoComponent } from '../edit-team-info/edit-team-info.componen
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import { ChangeRoleDialogComponent } from '../change-role-dialog/change-role-dialog.component';
+import { SpinnerService } from '../services/spinner/spinner.service';
 
 @Component({
   selector: 'app-team',
@@ -21,6 +22,7 @@ export class TeamComponent implements OnInit ,OnDestroy {
     public readonly teamService: TeamService,
     private readonly router: Router,
     public dialog: MatDialog,
+    public spinnerService: SpinnerService
   ) { }
 
   async ngOnInit(): Promise<void> {

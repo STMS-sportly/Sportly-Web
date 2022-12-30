@@ -1,12 +1,15 @@
 export interface EventDTO {
+  eventId: number,
   eventDate: string,
   title: string,
-  description: string
+  description: string,
+  id: string
 }
 
-export interface Event {
-  id: number,
+export interface TeamEvent {
+  eventId: number,
   eventDate: string,
   title: string,
-  description: string
+  description: string,
+  id: string
 }

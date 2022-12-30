@@ -49,7 +49,10 @@ export class HeaderComponent{
   }
 
   goToJoinTeam(): void {
-    this.dialog.open(ValidationCodeComponent);
+    this.dialog.open(ValidationCodeComponent, {
+      height: '800px',
+      width: '900px',
+    });
   }
 
   goToMyAccountInfo(): void {

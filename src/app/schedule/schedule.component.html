@@ -6,8 +6,8 @@
         <mbsc-textarea label="Description" [(ngModel)]="popupEventDescription"></mbsc-textarea>
         <mbsc-datepicker [(ngModel)]="popupEventDates" [options]="datePickerOptions" [controls]="popupEventAllDay ? datePickerControls : datetimePickerControls" [responsive]="popupEventAllDay ? datePickerResponsive : datetimePickerResponsive" [startInput]="startInput"></mbsc-datepicker>
         <mbsc-input #startInput label="Date"></mbsc-input>
-        <mbsc-time label="Time"></mbsc-time>
-        <!-- <mbsc-input #endInput label="Ends"></mbsc-input> -->
+        <mbsc-time label="Time" [(ngModel)]="calendarSelectedHour"></mbsc-time>
+        <!-- <mbsc-input #endInput label="Time"></mbsc-input> -->
 
         <div *ngIf="isEdit" class="mbsc-button-group">
             <mbsc-button class="mbsc-button-block" color="danger" variant="outline" (click)="onDeleteClick()">Delete event

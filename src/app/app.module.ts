@@ -9,7 +9,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
@@ -44,6 +44,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { TeamScheduleComponent } from './schedule/schedule.component';
 import { environment } from 'src/environments/environment';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CustomHttpInterceptor } from './http-interceptor';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import {MatChipsModule} from '@angular/material/chips';
     ChangeRoleDialogComponent,
   ],
   imports: [
+    MatProgressSpinnerModule,
     MbscModule,
     BrowserModule,
     AppRoutingModule,
@@ -92,7 +95,12 @@ import {MatChipsModule} from '@angular/material/chips';
   ],
   exports:[MatMenuModule],
   providers: [
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig }
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true
+    }
 ],
   bootstrap: [AppComponent]
 })

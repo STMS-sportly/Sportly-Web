@@ -112,7 +112,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .icon-background{
-  width: 5vw;
+  width: 100px;
   top:1vh;
   position: relative;
   justify-content: center;

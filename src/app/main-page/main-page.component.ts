@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ValidationCodePopUpComponent } from '../validation-code-pop-up/validation-code-pop-up.component';
 import { CreateTeamComponent } from '../create-team/create-team.component';
 import { ValidationCodeComponent } from '../validation-code/validation-code.component';
+import { SpinnerService } from '../services/spinner/spinner.service';
 
 @Component({
   selector: 'main-login-page',
@@ -30,7 +31,8 @@ export class MainPageComponent implements OnInit{
     public readonly teamService: TeamService,
     private readonly router: Router,
     public apiService: ApiService,
-    private dialogRef: MatDialog
+    private dialogRef: MatDialog,
+    public spinnerService: SpinnerService
   ) { }
 
    ngOnInit() {
@@ -64,6 +66,7 @@ export class MainPageComponent implements OnInit{
     console.log(this.apiService.teamDetails);
     this.router.navigateByUrl('team?id=' + teamId);
     this.apiService.getMonthEvents(teamId, userToken!);
+    this.apiService.getDayEvents(teamId, userToken!);
     this.teamService.isTeamViewActive = true;
   }
 
@@ -91,5 +94,9 @@ export class MainPageComponent implements OnInit{
     teamId = this.teamService.getTeamID(index);
     this.apiService.leaveTeam(teamId, userToken!);
     this.getTeams();
+  }
+
+  onPageChange(e: any) {
+
   }
 }
