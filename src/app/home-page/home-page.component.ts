@@ -5,6 +5,8 @@ import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 import { ApiService } from '../services/api/api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { QrCodeComponent } from '../qr-code/qr-code.component';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -19,6 +21,7 @@ export class HomePageComponent{
     private readonly authService: AuthService,
     private readonly router: Router,
     public apiService: ApiService,
+    public dialog: MatDialog,
   ) { }
 
   async login(): Promise<void> {
@@ -30,7 +33,7 @@ export class HomePageComponent{
   }
 
   mobileApp(): void {
-    this.router.navigateByUrl('/mobileapp');
+    this.dialog.open(QrCodeComponent)
   }
 
 

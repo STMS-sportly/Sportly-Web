@@ -47,6 +47,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CustomHttpInterceptor } from './http-interceptor';
 import { NgChatModule } from 'ng-chat';
+import { QRCodeModule } from 'angularx-qrcode';
+import { QrCodeComponent } from './qr-code/qr-code.component';
 
 @NgModule({
   declarations: [
@@ -64,8 +66,10 @@ import { NgChatModule } from 'ng-chat';
     NewEventDialogComponent,
     EditTeamInfoComponent,
     ChangeRoleDialogComponent,
+    QrCodeComponent
   ],
   imports: [
+    QRCodeModule,
     MatProgressSpinnerModule,
     MbscModule,
     BrowserModule,
