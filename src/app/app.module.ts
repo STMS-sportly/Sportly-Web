@@ -46,6 +46,7 @@ import { environment } from 'src/environments/environment';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CustomHttpInterceptor } from './http-interceptor';
+import { NgChatModule } from 'ng-chat';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { CustomHttpInterceptor } from './http-interceptor';
     MatTreeModule,
     ScheduleModule,
     MatChipsModule,
-    DateTimePickerModule
+    DateTimePickerModule,
+    NgChatModule
   ],
   exports:[MatMenuModule],
   providers: [

@@ -9,6 +9,7 @@ import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import { ChangeRoleDialogComponent } from '../change-role-dialog/change-role-dialog.component';
 import { SpinnerService } from '../services/spinner/spinner.service';
+import { map, Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-team',
@@ -16,6 +17,9 @@ import { SpinnerService } from '../services/spinner/spinner.service';
   styleUrls: ['./team.component.css']
 })
 export class TeamComponent implements OnInit ,OnDestroy {
+
+
+  timerSubscription!: Subscription;
 
   constructor(
     public apiService: ApiService,
@@ -26,30 +30,39 @@ export class TeamComponent implements OnInit ,OnDestroy {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
+    this.timerSubscription = timer(0, 30000).pipe(
+      map(() => {
+        if(!this.teamService.isModalOpen){
+          this.apiService.getMessages(this.teamService.teamId!, this.apiService.userToken!);
+          this.apiService.getMonthEvents(this.teamService.teamId!, this.apiService.userToken!);
+          this.apiService.getTeamDetails(this.teamService.teamId!, this.apiService.userToken!);
+        }
+      })
+    ).subscribe();
   }
 
   ngOnDestroy(): void {
     this.teamService.isTeamViewActive = false;
+    this.timerSubscription.unsubscribe();
   }
 
   async deleteTeam(): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
-    this.apiService.deleteTeam(this.apiService.teamDetails.id, userToken!);
+    this.apiService.deleteTeam(this.apiService.teamDetails.id, this.apiService.userToken!);
     this.router.navigateByUrl('loginPage');
   }
 
   async removeUserFromTeam(index: number): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
-    this.apiService.removeUserFromTeam(this.apiService.teamDetails.id, this.apiService.teamDetails.members[index].id, userToken!);
+    this.apiService.removeUserFromTeam(this.apiService.teamDetails.id, this.apiService.teamDetails.members[index].id, this.apiService.userToken!);
   }
 
   async editTeam(): Promise<void> {
+    this.teamService.isModalOpen = true;
     this.dialog.open(EditTeamInfoComponent);
   }
 
   editRoles(index: number): void {
     this.teamService.getUser(index);
+    this.teamService.isModalOpen = true;
     this.dialog.open(ChangeRoleDialogComponent);
   }
 

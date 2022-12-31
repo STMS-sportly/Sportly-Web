@@ -4,3 +4,9 @@ export interface User {
   lastName: string,
   isAdmin: boolean
 }
+
+export interface GetCurrentUserDTO{
+  userId: number,
+  firstName: string,
+  lastName: string
+}

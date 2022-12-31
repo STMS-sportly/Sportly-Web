@@ -43,13 +43,12 @@ export class EditTeamInfoComponent implements OnInit{
   onChangeLocation(event: any) {this.apiService.teamDetails.location = event.target.value;}
 
   async editTeam(): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
     this.apiService.updateTeam(this.apiService.teamDetails.id,
                               this.apiService.teamDetails.teamName,
                               this.apiService.teamDetails.location!,
                               this.apiService.teamDetails.organizationName!,
-                              userToken!);
+                              this.apiService.userToken!);
+    this.teamService.isModalOpen = false;
     this.dialogRef.closeAll();
-    this.apiService.getTeamDetails(this.apiService.teamDetails.id, userToken!);
   }
 }

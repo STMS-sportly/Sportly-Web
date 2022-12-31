@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { TeamDetailsDTO, TeamDTO } from 'src/app/models/team';
 import { InvitationCode } from 'src/app/models/invitation-code';
 import { EventDTO, TeamEvent } from 'src/app/models/event';
+import { GetCurrentUserDTO } from 'src/app/models/user';
+import { ChatMsgDTO } from 'src/app/models/chat';
+import firebase from 'firebase/compat/app';
 
 interface User {
   token: string
@@ -16,6 +19,7 @@ interface User {
 export class ApiService {
 
   API_URL = 'https://sportly-stms.azurewebsites.net';
+  public userToken: string | undefined;
 
   public event: EventDTO = {} as EventDTO;
   public teamEvents: TeamEvent[] = [];
@@ -39,7 +43,15 @@ export class ApiService {
     code: ''
   };
 
+  public currentUser: GetCurrentUserDTO = {} as GetCurrentUserDTO;
+  public newMessage: ChatMsgDTO = {} as ChatMsgDTO;
+  public chatMessages: ChatMsgDTO[] = [];
+
   constructor(private http: HttpClient) { }
+
+  public async getUserToken(): Promise<void> {
+    this.userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
+  }
 
   public getTeams(token: string): void{
     let headers = new HttpHeaders();
@@ -195,6 +207,38 @@ export class ApiService {
   },
    {headers: headers})
     .subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  getCurrentUserData(token: string): void {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', "application/json").set('idToken', token);
+    this.http.get(`${this.API_URL}/user/GetUserData`, {headers: headers})
+    .subscribe((res: any) => {
+      this.currentUser = res
+      console.log(res);
+    });
+  }
+
+  sendMessage(teamId: number, newMessage: string, token: string){
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', "application/json").set('idToken', token);
+    let params = new HttpParams();
+    params = params.append('message', newMessage);
+    this.http.post(`${this.API_URL}/chat/SendMessage/` + teamId, this.chatMessages ,{headers: headers, params: params})
+    .subscribe((res: any) => {
+      this.currentUser = res
+      console.log(res);
+    });
+  }
+
+  getMessages(teamId: number, token: string): void {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', "application/json").set('idToken', token);
+    this.http.get(`${this.API_URL}/chat/GetMessages/`+ teamId, {headers: headers})
+    .subscribe((res: any) => {
+      this.chatMessages = res.messages
       console.log(res);
     });
   }

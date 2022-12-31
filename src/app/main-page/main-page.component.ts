@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth/auth.service';
 import { TeamService } from '../services/teams/team.service';
 import { ApiService} from '../services/api/api.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, timer } from 'rxjs';
 import firebase from 'firebase/compat/app';
 import { TeamDTO } from '../models/team';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,10 +21,9 @@ import { SpinnerService } from '../services/spinner/spinner.service';
 export class MainPageComponent implements OnInit{
 
   teams: TeamDTO[] = [];
-
+  timerSubscription!: Subscription;
 
   teamIconFootball: any = "../../assets/ball.png";
-  image = document.getElementById("image");
 
 
   constructor(
@@ -35,12 +34,25 @@ export class MainPageComponent implements OnInit{
     public spinnerService: SpinnerService
   ) { }
 
-   ngOnInit() {
-    this.getTeams();
+   async ngOnInit(): Promise<void> {
+    // const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
+    this.apiService.getUserToken();
+    this.apiService.getCurrentUserData(this.apiService.userToken!);
+    this.timerSubscription = timer(0, 30000).pipe(
+      map(() => {
+        if(!this.teamService.isModalOpen){
+          this.getTeams();
+        }
+      })
+    ).subscribe();
+  }
 
+  ngOnDestroy(): void {
+    this.timerSubscription.unsubscribe();
   }
 
   openDialog(){
+    this.teamService.isModalOpen = true;
     this.dialogRef.open(ValidationCodePopUpComponent);
   }
 
@@ -57,16 +69,16 @@ export class MainPageComponent implements OnInit{
     return this.teamIconFootball;
   }
 
-  async goToTeamDetails(index: number): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
-    this.apiService.getDisciplines(userToken!);
+  goToTeamDetails(index: number): void {
+    // const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
+    // this.apiService.getDisciplines(this.apiService.userToken!);
     let teamId : number;
     teamId = this.teamService.getTeamID(index);
-    this.apiService.getTeamDetails(teamId, userToken!);
+    this.apiService.getTeamDetails(teamId, this.apiService.userToken!);
     console.log(this.apiService.teamDetails);
     this.router.navigateByUrl('team?id=' + teamId);
-    this.apiService.getMonthEvents(teamId, userToken!);
-    this.apiService.getDayEvents(teamId, userToken!);
+    this.apiService.getMonthEvents(teamId, this.apiService.userToken!);
+    this.apiService.getDayEvents(teamId, this.apiService.userToken!);
     this.teamService.isTeamViewActive = true;
   }
 
@@ -80,19 +92,17 @@ export class MainPageComponent implements OnInit{
   }
 
   async getIvitationCode(index: number): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
     let teamId : number;
     teamId = this.teamService.getTeamID(index);
-    this.apiService.getTeamCode(teamId, userToken!);
-    console.log(this.apiService.invitationCode)
+    this.apiService.getTeamCode(teamId, this.apiService.userToken!);
+    this.teamService.isModalOpen = true;
     this.dialogRef.open(ValidationCodePopUpComponent);;
   }
 
   async leaveTeam(index: number): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
     let teamId : number;
     teamId = this.teamService.getTeamID(index);
-    this.apiService.leaveTeam(teamId, userToken!);
+    this.apiService.leaveTeam(teamId, this.apiService.userToken!);
     this.getTeams();
   }
 

@@ -22,9 +22,8 @@ export class ChangeRoleDialogComponent {
   ){}
 
   async changeUserRole(): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
-    this.apiService.changeMemberRole(this.apiService.teamDetails.id, this.teamService.id, this.userRoles, userToken!);
+    this.apiService.changeMemberRole(this.apiService.teamDetails.id, this.teamService.teamId!, this.userRoles, this.apiService.userToken!);
+    this.teamService.isModalOpen = false;
     this.dialogRef.closeAll();
-    this.apiService.getTeamDetails(this.apiService.teamDetails.id, userToken!);
   }
 }

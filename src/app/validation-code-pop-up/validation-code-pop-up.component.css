@@ -1,12 +1,12 @@
 .modal-code{
   height: 20vh;
-  width: 30vw;
+  width: 20vw;
   overflow-x: hidden;
 }
 
 .modal-code-content{
-  left: 8vw;
-  top: 7vh;
+  left: 7vw;
+  top: 3vh;
   position: relative;
   overflow-x: hidden;
 }

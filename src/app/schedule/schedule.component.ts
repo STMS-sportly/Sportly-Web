@@ -13,6 +13,7 @@ import firebase from 'firebase/compat/app';
 import { map, Subscription, timer } from 'rxjs';
 import { EventDTO } from '../models/event';
 import { ApiService } from '../services/api/api.service'
+import { TeamService } from '../services/teams/team.service';
 
 setOptions({
     theme: 'ios',
@@ -29,7 +30,10 @@ setOptions({
 export class TeamScheduleComponent {
     constructor(
       private notify: Notifications,
-      public apiService: ApiService) {}
+      public apiService: ApiService,
+      public teamService: TeamService)
+    {}
+
     @ViewChild('popup', { static: false })
     popup!: MbscPopup;
     @ViewChild('colorPicker', { static: false })
@@ -68,6 +72,7 @@ export class TeamScheduleComponent {
             this.popupButtons = this.popupEditButtons;
             this.popupAnchor = args.domEvent.currentTarget;
             // open the popup
+            this.teamService.isModalOpen = true;
             this.popup.open();
         },
         onEventCreated: (args) => {
@@ -81,6 +86,7 @@ export class TeamScheduleComponent {
                 this.popupButtons = this.popupAddButtons;
                 this.popupAnchor = args.target;
                 // open the popup
+                this.teamService.isModalOpen = true;
                 this.popup.open();
             });
         },
@@ -180,37 +186,20 @@ export class TeamScheduleComponent {
         }
     };
 
-    timerSubscription: Subscription | undefined;
-
-    async ngOnInit(): Promise<void> {
-      const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
-      // timer(0, 10000) call the function immediately and every 10 seconds
-      // this.timerSubscription = timer(0, 8000).pipe(
-    //   map(() => {
-    //     this.apiService.getMonthEvents(this.apiService.teamDetails.id, userToken!)
-    //   })
-    // ).subscribe();
-}
-
-// don't forget to unsubscribe when the Observable is not necessary anymore
-  ngOnDestroy(): void {
-    this.timerSubscription!.unsubscribe();
-  }
-
     loadPopupForm(event: MbscCalendarEvent): void {
         this.popupEventTitle = event.title;
         this.popupEventDescription = event.description;
         this.popupEventDates = event.date;
+        this.teamService.isModalOpen = true;
     }
     async saveEvent(): Promise<void> {
-      const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
         this.tempEvent.title = this.popupEventTitle!;
         this.tempEvent.description = this.popupEventDescription!;
         this.tempEvent.eventDate = this.popupEventDates[0];
         if (this.isEdit) {
             // update the event in the list
             this.myEvents = [...this.myEvents];
-            this.apiService.updateEvent(this.apiService.teamDetails.id, this.tempEvent.eventId, this.tempEvent, userToken!)
+            this.apiService.updateEvent(this.apiService.teamDetails.id, this.tempEvent.eventId, this.tempEvent, this.apiService.userToken!)
             // here you can update the event in your storage as well
             // ...
         } else {
@@ -219,23 +208,23 @@ export class TeamScheduleComponent {
             // here you can add the event to your storage as well
             // ...        console.log(this.calendarSelectedHour)
           this.calendarSelectedDate = this.popupEventDates[0];
-          this.apiService.createEvent(this.apiService.teamDetails.id, this.tempEvent.eventDate, this.tempEvent.title, this.tempEvent.description, userToken!);
+          this.apiService.createEvent(this.apiService.teamDetails.id, this.tempEvent.eventDate, this.tempEvent.title, this.tempEvent.description, this.apiService.userToken!);
         }
+        this.teamService.isModalOpen = false;
         // navigate the calendar
         this.popup.close();
     }
     async deleteEvent(event: MbscCalendarEvent): Promise<void> {
-      const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
         var ev = this.apiService.teamEvents.filter(item => item.id === event.id);
         var teamEventIndex = event.id!.toString().replace(/\D/g, "");
         console.log(Number(teamEventIndex) - 1);
-        this.apiService.deleteEvent(this.apiService.teamDetails.id, ev[0].eventId, userToken!);
+        this.apiService.deleteEvent(this.apiService.teamDetails.id, ev[0].eventId, this.apiService.userToken!);
 
     }
     async onDeleteClick(): Promise<void> {
       const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
         this.deleteEvent(this.tempEvent);
-
+        this.teamService.isModalOpen = false;
         this.popup.close();
     }
 

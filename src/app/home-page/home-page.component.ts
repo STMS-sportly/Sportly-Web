@@ -33,4 +33,5 @@ export class HomePageComponent{
     this.router.navigateByUrl('/mobileapp');
   }
 
+
 }

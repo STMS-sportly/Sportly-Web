@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { TeamService } from '../services/teams/team.service';
 
 @Component({
   selector: 'app-validation-code',
@@ -16,6 +18,8 @@ export class ValidationCodeComponent{
   constructor(
     public apiService: ApiService,
     private readonly router: Router,
+    public dialogRef: MatDialog,
+    public teamService: TeamService
   ) { }
 
   @ViewChild('ngOtpInput', { static: false}) ngOtpInput: any;
@@ -26,8 +30,8 @@ export class ValidationCodeComponent{
     disableAutoFocus: false,
     placeholder: '',
     inputStyles: {
-      'width': '7rem',
-      'height': '10rem'
+      'width': '4rem',
+      'height': '6rem'
     }
   };
 
@@ -63,9 +67,8 @@ export class ValidationCodeComponent{
   }
 
   async joinTeam(): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
-    this.apiService.joinTeam(this.otp!, userToken!);
-    this.router.navigateByUrl('loginPage');
-    this.apiService.getTeams(userToken!);
+    this.apiService.joinTeam(this.otp!, this.apiService.userToken!);
+    this.teamService.isModalOpen = false;
+    this.dialogRef.closeAll();
   }
 }

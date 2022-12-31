@@ -8,8 +8,9 @@ import { ApiService } from '../api/api.service';
 export class TeamService {
 
   userName: string = '';
-  id: number = 0;
-  isTeamViewActive: boolean = false
+  teamId: number | undefined;
+  isTeamViewActive: boolean = false;
+  isModalOpen: boolean = false;
 
   public dataColor: any;
   constructor(
@@ -25,7 +26,8 @@ export class TeamService {
   }
 
   getTeamID(index: number): number {
-    return this.apiService.teams[index].id;
+    this.teamId = this.apiService.teams[index].id;
+    return this.teamId;
   }
 
   getTeamIconBackgroundColor(index: number): string {
@@ -80,7 +82,7 @@ export class TeamService {
   }
 
   getUser(index: number): void {
-    this.id = this.apiService.teamDetails.members[index].id;
+    this.teamId = this.apiService.teamDetails.members[index].id;
     this.userName = this.apiService.teamDetails.members[index].firstName + ' ' + this.apiService.teamDetails.members[index].lastName;
   }
 

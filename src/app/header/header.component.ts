@@ -39,8 +39,8 @@ export class HeaderComponent{
   }
 
   async goToCreateTeam(): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
-    this.apiService.getDisciplines(userToken!);
+    this.apiService.getDisciplines(this.apiService.userToken!);
+    this.teamService.isModalOpen = true;
     this.dialog.open(CreateTeamComponent,{
       height: '600px',
       width: '700px',
@@ -49,8 +49,9 @@ export class HeaderComponent{
   }
 
   goToJoinTeam(): void {
+    this.teamService.isModalOpen = true;
     this.dialog.open(ValidationCodeComponent, {
-      height: '800px',
+      height: '500px',
       width: '900px',
     });
   }

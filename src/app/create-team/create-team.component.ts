@@ -4,6 +4,7 @@ import { ApiService } from '../services/api/api.service'
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { TeamService } from '../services/teams/team.service';
 
 @Component({
   selector: 'app-create-team',
@@ -27,7 +28,8 @@ export class CreateTeamComponent implements OnInit {
   constructor(
     public apiService: ApiService,
     private router: Router,
-    private dialogRef: MatDialog
+    private dialogRef: MatDialog,
+    public teamService: TeamService
   ) { }
 
   ngOnInit(): void {
@@ -53,10 +55,9 @@ export class CreateTeamComponent implements OnInit {
   }
 
   async createTeam(): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
     this.validateData();
-    this.apiService.createTeam(this.team, userToken!);
+    this.apiService.createTeam(this.team, this.apiService.userToken!);
+    this.teamService.isModalOpen = false;
     this.dialogRef.closeAll();
-    this.apiService.getTeams(userToken!);
   }
 }
