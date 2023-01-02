@@ -64,7 +64,7 @@ export class TeamScheduleComponent {
         },
         onEventClick: (args) => {
             this.isEdit = true;
-            this.tempEvent = args.event;
+            // this.tempEvent = args.event;
             // fill popup form with event data
             this.loadPopupForm(args.event);
             // set popup options
@@ -78,7 +78,7 @@ export class TeamScheduleComponent {
         onEventCreated: (args) => {
             setTimeout(() => {
                 this.isEdit = false;
-                this.tempEvent = args.event;
+                // this.tempEvent = args.event;
                 // fill popup form with event data
                 this.loadPopupForm(args.event);
                 // set popup options
@@ -188,7 +188,7 @@ export class TeamScheduleComponent {
 
     loadPopupForm(event: MbscCalendarEvent): void {
         this.popupEventTitle = event.title;
-        this.popupEventDescription = event.description;
+        // this.popupEventDescription = event.description;
         this.popupEventDates = event.date;
         this.teamService.isModalOpen = true;
     }
