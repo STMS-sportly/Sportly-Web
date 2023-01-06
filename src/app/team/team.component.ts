@@ -18,7 +18,7 @@ import { map, Subscription, timer } from 'rxjs';
 })
 export class TeamComponent implements OnInit ,OnDestroy {
 
-
+  teamId = this.teamService.teamId;
   timerSubscription!: Subscription;
 
   constructor(
@@ -30,12 +30,12 @@ export class TeamComponent implements OnInit ,OnDestroy {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.timerSubscription = timer(0, 30000).pipe(
+    this.timerSubscription = timer(0, 3000).pipe(
       map(() => {
         if(!this.teamService.isModalOpen){
-          this.apiService.getMessages(this.teamService.teamId!, this.apiService.userToken!);
-          this.apiService.getMonthEvents(this.teamService.teamId!, this.apiService.userToken!);
-          this.apiService.getTeamDetails(this.teamService.teamId!, this.apiService.userToken!);
+          this.apiService.getMessages(this.teamId!, this.apiService.userToken!);
+          this.apiService.getMonthEvents(this.teamId!, this.apiService.userToken!);
+          this.apiService.getTeamDetails(this.teamId!, this.apiService.userToken!);
         }
       })
     ).subscribe();

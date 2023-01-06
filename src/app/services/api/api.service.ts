@@ -54,9 +54,15 @@ export class ApiService {
   }
 
   public getTeams(token: string): void{
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', "application/json").set('idToken', token);
-
+    let headers = new HttpHeaders(      {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+    });
+    headers = headers.set('idToken', token);
+    console.log(headers)
     this.http.get(`${this.API_URL}/team/GetTeams`, {headers: headers})
       .subscribe((res: any) => {
         this.teams = res.teams;

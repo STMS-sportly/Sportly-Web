@@ -9,6 +9,7 @@ export class TeamService {
 
   userName: string = '';
   teamId: number | undefined;
+  userId: number | undefined;
   isTeamViewActive: boolean = false;
   isModalOpen: boolean = false;
 
@@ -82,7 +83,7 @@ export class TeamService {
   }
 
   getUser(index: number): void {
-    this.teamId = this.apiService.teamDetails.members[index].id;
+    this.userId = this.apiService.teamDetails.members[index].id;
     this.userName = this.apiService.teamDetails.members[index].firstName + ' ' + this.apiService.teamDetails.members[index].lastName;
   }
 
@@ -91,6 +92,15 @@ export class TeamService {
       return true;
     } else {
       return false;
+    }
+  }
+
+  getUserRole(userId: number): string {
+    const user = this.apiService.teamDetails.members.find(x => x.id === userId);
+    if(user === undefined){
+      return ""
+    }else {
+      return user.role
     }
   }
 }

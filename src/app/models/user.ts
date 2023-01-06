@@ -2,7 +2,8 @@ export interface User {
   firstName: string,
   id: number,
   lastName: string,
-  isAdmin: boolean
+  isAdmin: boolean,
+  role: string
 }
 
 export interface GetCurrentUserDTO{
