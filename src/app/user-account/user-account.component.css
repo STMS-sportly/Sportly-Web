@@ -1,0 +1,31 @@
+.user-col-1{
+  box-sizing: border-box;
+    /* position: absolute; */
+    /* width: 450px; */
+    /* height: 850px; */
+    /* left: 8vw; */
+    top: 14vh;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    align-items: center;
+    float: left;
+}
+
+.icon-user-details{
+  align-items: center;
+  position: relative;
+  top: 2vh;
+  display: block;
+}
+
+.user-details-name{
+  align-items: center;
+  position: relative;
+}
+
+.user-details-email{
+  align-items: center;
+  position: relative;
+  color: gray;
+}

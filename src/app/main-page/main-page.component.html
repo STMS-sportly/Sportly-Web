@@ -20,7 +20,7 @@
                 </div>
               </div>
               <div class="col-sm">
-                <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="tdb">
+                <button mat-icon-button [matMenuTriggerFor]="beforeMenu" (menuOpened)="menuAction()" (menuClosed)="menuAction()" class="tdb">
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #beforeMenu="matMenu" xPosition="before">

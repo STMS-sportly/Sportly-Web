@@ -52,7 +52,7 @@ export class MainPageComponent implements OnInit{
   }
 
   openDialog(){
-    this.teamService.isModalOpen = true;
+    this.teamService.menuAction();
     this.dialogRef.open(ValidationCodePopUpComponent);
   }
 
@@ -94,8 +94,8 @@ export class MainPageComponent implements OnInit{
   async getIvitationCode(index: number): Promise<void> {
     let teamId : number;
     teamId = this.teamService.getTeamID(index);
+    this.menuAction();
     this.apiService.getTeamCode(teamId, this.apiService.userToken!);
-    this.teamService.isModalOpen = true;
     this.dialogRef.open(ValidationCodePopUpComponent);;
   }
 
@@ -106,7 +106,7 @@ export class MainPageComponent implements OnInit{
     this.getTeams();
   }
 
-  onPageChange(e: any) {
-
+  menuAction(): void {
+    this.teamService.menuAction();
   }
 }

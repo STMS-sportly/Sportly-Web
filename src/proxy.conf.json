@@ -1,6 +1,6 @@
 {
   "/api/*": {
-      "target": "http://localhost:4200",
+      "target": "sportly-stms.azurewebsites.net",
       "secure": false,
       "logLevel": "debug"
   }

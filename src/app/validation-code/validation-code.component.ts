@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { TeamService } from '../services/teams/team.service';
   templateUrl: './validation-code.component.html',
   styleUrls: ['./validation-code.component.css']
 })
-export class ValidationCodeComponent{
+export class ValidationCodeComponent implements OnDestroy{
   otp: string | null = null;
   isOtpValid: boolean = false;
   showOtpComponent = true;
@@ -21,6 +21,10 @@ export class ValidationCodeComponent{
     public dialogRef: MatDialog,
     public teamService: TeamService
   ) { }
+
+  ngOnDestroy(): void {
+    this.teamService.menuAction();
+  }
 
   @ViewChild('ngOtpInput', { static: false}) ngOtpInput: any;
   config = {
@@ -68,7 +72,7 @@ export class ValidationCodeComponent{
 
   async joinTeam(): Promise<void> {
     this.apiService.joinTeam(this.otp!, this.apiService.userToken!);
-    this.teamService.isModalOpen = false;
+
     this.dialogRef.closeAll();
   }
 }

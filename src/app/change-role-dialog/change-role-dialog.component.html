@@ -6,7 +6,7 @@
       aria-labelledby="example-radio-group-label"
       class="example-radio-group"
       [(ngModel)]="userRoles">
-      <mat-radio-button class="example-radio-button" *ngFor="let role of radioButtonOptions, let i = index" [value]="role.value" [checked]="role.checked">
+      <mat-radio-button class="example-radio-button" *ngFor="let role of radioButtonOptions" [value]="role.value" [checked]="role.checked">
         {{role.name}}
       </mat-radio-button>
     </mat-radio-group>
@@ -17,8 +17,8 @@
       aria-labelledby="example-radio-group-label"
       class="example-radio-group"
       [(ngModel)]="userRoles">
-      <mat-radio-button class="example-radio-button" *ngFor="let role of amateurRoles" [value]="userRoles">
-        {{role}}
+      <mat-radio-button class="example-radio-button" *ngFor="let role of radioButtonOptions" [value]="role.value" [checked]="role.checked">
+        {{role.name}}
       </mat-radio-button>
     </mat-radio-group>
     <button mat-stroked-button color="black" (click)="changeUserRole()">Edit user role</button>

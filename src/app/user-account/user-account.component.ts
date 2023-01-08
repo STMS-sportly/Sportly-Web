@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthService } from '../services/auth/auth.service'
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserAccountComponent implements OnInit {
 
-  constructor() { }
+  user$ = this.authService.user$;
+
+  constructor(
+    private readonly authService: AuthService,
+  ) { }
 
   ngOnInit(): void {
   }

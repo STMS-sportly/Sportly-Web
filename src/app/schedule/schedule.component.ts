@@ -72,7 +72,7 @@ export class TeamScheduleComponent {
             this.popupButtons = this.popupEditButtons;
             this.popupAnchor = args.domEvent.currentTarget;
             // open the popup
-            this.teamService.isModalOpen = true;
+            this.teamService.menuAction();
             this.popup.open();
         },
         onEventCreated: (args) => {
@@ -86,7 +86,7 @@ export class TeamScheduleComponent {
                 this.popupButtons = this.popupAddButtons;
                 this.popupAnchor = args.target;
                 // open the popup
-                this.teamService.isModalOpen = true;
+                this.teamService.menuAction();
                 this.popup.open();
             });
         },
@@ -190,7 +190,7 @@ export class TeamScheduleComponent {
         this.popupEventTitle = event.title;
         // this.popupEventDescription = event.description;
         this.popupEventDates = event.date;
-        this.teamService.isModalOpen = true;
+        this.teamService.menuAction();
     }
     async saveEvent(): Promise<void> {
         this.tempEvent.title = this.popupEventTitle!;
@@ -210,11 +210,11 @@ export class TeamScheduleComponent {
           this.calendarSelectedDate = this.popupEventDates[0];
           this.apiService.createEvent(this.apiService.teamDetails.id, this.tempEvent.eventDate, this.tempEvent.title, this.tempEvent.description, this.apiService.userToken!);
         }
-        this.teamService.isModalOpen = false;
+        this.teamService.menuAction();
         // navigate the calendar
         this.popup.close();
     }
-    async deleteEvent(event: MbscCalendarEvent): Promise<void> {
+    async deleteEvent(event: EventDTO): Promise<void> {
         var ev = this.apiService.teamEvents.filter(item => item.id === event.id);
         var teamEventIndex = event.id!.toString().replace(/\D/g, "");
         console.log(Number(teamEventIndex) - 1);
@@ -224,7 +224,7 @@ export class TeamScheduleComponent {
     async onDeleteClick(): Promise<void> {
       const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
         this.deleteEvent(this.tempEvent);
-        this.teamService.isModalOpen = false;
+        this.teamService.menuAction();
         this.popup.close();
     }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { TeamService } from '../services/teams/team.service';
   templateUrl: './edit-team-info.component.html',
   styleUrls: ['./edit-team-info.component.css']
 })
-export class EditTeamInfoComponent implements OnInit{
+export class EditTeamInfoComponent implements OnInit, OnDestroy{
 
   editTeamDisabled = false;
 
@@ -21,6 +21,10 @@ export class EditTeamInfoComponent implements OnInit{
     public apiService: ApiService,
     private dialogRef: MatDialog
   ) { }
+
+  ngOnDestroy(): void {
+    this.teamService.menuAction();
+  }
 
   async ngOnInit(): Promise<void> {
     const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
@@ -42,13 +46,12 @@ export class EditTeamInfoComponent implements OnInit{
   onChangeOrg(event: any) {this.apiService.teamDetails.organizationName = event.target.value;}
   onChangeLocation(event: any) {this.apiService.teamDetails.location = event.target.value;}
 
-  async editTeam(): Promise<void> {
+  editTeam(): void {
     this.apiService.updateTeam(this.apiService.teamDetails.id,
                               this.apiService.teamDetails.teamName,
                               this.apiService.teamDetails.location!,
                               this.apiService.teamDetails.organizationName!,
                               this.apiService.userToken!);
-    this.teamService.isModalOpen = false;
     this.dialogRef.closeAll();
   }
 }

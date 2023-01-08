@@ -69,9 +69,9 @@ import { QrCodeComponent } from './qr-code/qr-code.component';
     QrCodeComponent
   ],
   imports: [
+    MbscModule,
     QRCodeModule,
     MatProgressSpinnerModule,
-    MbscModule,
     BrowserModule,
     AppRoutingModule,
     AppFirebaseModule,
@@ -97,7 +97,7 @@ import { QrCodeComponent } from './qr-code/qr-code.component';
     ScheduleModule,
     MatChipsModule,
     DateTimePickerModule,
-    NgChatModule
+    NgChatModule,
   ],
   exports:[MatMenuModule],
   providers: [

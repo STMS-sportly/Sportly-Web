@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TeamDTO } from '../models/team';
 import { ApiService } from '../services/api/api.service'
 import firebase from 'firebase/compat/app';
@@ -11,7 +11,7 @@ import { TeamService } from '../services/teams/team.service';
   templateUrl: './create-team.component.html',
   styleUrls: ['./create-team.component.css']
 })
-export class CreateTeamComponent implements OnInit {
+export class CreateTeamComponent implements OnInit, OnDestroy {
 
   createTeamDisabled = false
   team: TeamDTO =     {
@@ -37,6 +37,10 @@ export class CreateTeamComponent implements OnInit {
     console.log(this.apiService.sportsDisciplines)
   }
 
+  ngOnDestroy(): void {
+    this.teamService.menuAction();
+  }
+
   validateData(): void {
     if(this.team.teamName.length < 1
       || this.team.teamType.length < 1){
@@ -57,7 +61,6 @@ export class CreateTeamComponent implements OnInit {
   async createTeam(): Promise<void> {
     this.validateData();
     this.apiService.createTeam(this.team, this.apiService.userToken!);
-    this.teamService.isModalOpen = false;
     this.dialogRef.closeAll();
   }
 }

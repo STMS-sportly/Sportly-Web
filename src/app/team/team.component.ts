@@ -19,6 +19,7 @@ import { map, Subscription, timer } from 'rxjs';
 export class TeamComponent implements OnInit ,OnDestroy {
 
   teamId = this.teamService.teamId;
+  userRole: string | undefined;
   timerSubscription!: Subscription;
 
   constructor(
@@ -30,7 +31,8 @@ export class TeamComponent implements OnInit ,OnDestroy {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.timerSubscription = timer(0, 3000).pipe(
+    this.userRole = this.teamService.getCurrentUserRole();
+    this.timerSubscription = timer(0, 5000).pipe(
       map(() => {
         if(!this.teamService.isModalOpen){
           this.apiService.getMessages(this.teamId!, this.apiService.userToken!);
@@ -46,7 +48,7 @@ export class TeamComponent implements OnInit ,OnDestroy {
     this.timerSubscription.unsubscribe();
   }
 
-  async deleteTeam(): Promise<void> {
+  deleteTeam(): void {
     this.apiService.deleteTeam(this.apiService.teamDetails.id, this.apiService.userToken!);
     this.router.navigateByUrl('loginPage');
   }
@@ -55,15 +57,25 @@ export class TeamComponent implements OnInit ,OnDestroy {
     this.apiService.removeUserFromTeam(this.apiService.teamDetails.id, this.apiService.teamDetails.members[index].id, this.apiService.userToken!);
   }
 
-  async editTeam(): Promise<void> {
-    this.teamService.isModalOpen = true;
+  editTeam(): void {
+    this.teamService.menuAction();
     this.dialog.open(EditTeamInfoComponent);
   }
 
   editRoles(index: number): void {
+    this.teamService.menuAction();
     this.teamService.getUser(index);
-    this.teamService.isModalOpen = true;
     this.dialog.open(ChangeRoleDialogComponent);
   }
 
+  isCurrentUserAdmin(): boolean {
+    if(this.userRole === "ProAdmin" || this.userRole === "Admin"){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  menuAction(): void {
+    this.teamService.menuAction();
+  }
 }

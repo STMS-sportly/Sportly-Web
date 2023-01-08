@@ -12,6 +12,7 @@ export class TeamService {
   userId: number | undefined;
   isTeamViewActive: boolean = false;
   isModalOpen: boolean = false;
+  currentUserRole: string | undefined;
 
   public dataColor: any;
   constructor(
@@ -102,5 +103,15 @@ export class TeamService {
     }else {
       return user.role
     }
+  }
+
+  getCurrentUserRole(): string {
+    const user = this.apiService.teamDetails.members.find(x => x.id === this.apiService.currentUser.userId);
+    this.currentUserRole = user?.role;
+    return this.currentUserRole!
+  }
+
+  menuAction(): void {
+    this.isModalOpen = !this.isModalOpen;
   }
 }

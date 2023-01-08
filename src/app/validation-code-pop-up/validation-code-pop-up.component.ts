@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import {Clipboard} from '@angular/cdk/clipboard';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,7 +9,7 @@ import { TeamService } from '../services/teams/team.service';
   templateUrl: './validation-code-pop-up.component.html',
   styleUrls: ['./validation-code-pop-up.component.css']
 })
-export class ValidationCodePopUpComponent implements OnInit {
+export class ValidationCodePopUpComponent implements OnDestroy {
 
   constructor(
     public apiService: ApiService,
@@ -18,12 +18,12 @@ export class ValidationCodePopUpComponent implements OnInit {
     public teamService: TeamService
   ) { }
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+    this.teamService.menuAction();
   }
 
   copyCode(): void {
     this.clipboard.copy(this.apiService.invitationCode.code);
-    this.teamService.isModalOpen = false;
     this.dialogRef.closeAll();
   }
 
