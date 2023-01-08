@@ -214,7 +214,7 @@ export class TeamScheduleComponent {
         // navigate the calendar
         this.popup.close();
     }
-    async deleteEvent(event: EventDTO): Promise<void> {
+    async deleteEvent(event: MbscCalendarEvent): Promise<void> {
         var ev = this.apiService.teamEvents.filter(item => item.id === event.id);
         var teamEventIndex = event.id!.toString().replace(/\D/g, "");
         console.log(Number(teamEventIndex) - 1);
