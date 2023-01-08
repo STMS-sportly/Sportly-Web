@@ -38,7 +38,7 @@ export class MainPageComponent implements OnInit{
     // const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
     this.apiService.getUserToken();
     this.apiService.getCurrentUserData(this.apiService.userToken!);
-    this.timerSubscription = timer(0, 30000).pipe(
+    this.timerSubscription = timer(0, 5000).pipe(
       map(() => {
         if(!this.teamService.isModalOpen){
           this.getTeams();
