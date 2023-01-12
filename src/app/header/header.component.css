@@ -106,3 +106,24 @@
   color: #000000;
   border-color: #000000;
 }
+
+.header-btn{
+  box-sizing: border-box;
+  font: Mukta;
+  font-size: large;
+  width: 10vw;
+  top: 19px;
+  height: 6vh;
+  font-weight: 100;
+  position: absolute;
+  color: #FFFFFF;
+  background: #000000;
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+
+.header-btn:hover{
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #000000;
+}

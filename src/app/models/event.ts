@@ -2,7 +2,7 @@ export interface EventDTO {
   eventId: number,
   eventDate: string,
   title: string,
-  description: string,
+  description?: string,
   id: string
 }
 

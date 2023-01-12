@@ -117,5 +117,13 @@
 }
 
 .spinner{
-  margin: 50% 50%;
+  top: 50vh;
+  left: 50vw;
+  position: relative;
+}
+
+.no-teams-msg{
+  top: 50vh;
+  left: 50vw;
+  position: relative;
 }

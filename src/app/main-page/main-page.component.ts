@@ -35,7 +35,6 @@ export class MainPageComponent implements OnInit{
   ) { }
 
    async ngOnInit(): Promise<void> {
-    // const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
     this.apiService.getUserToken();
     this.apiService.getCurrentUserData(this.apiService.userToken!);
     this.timerSubscription = timer(0, 5000).pipe(
@@ -82,12 +81,8 @@ export class MainPageComponent implements OnInit{
     this.teamService.isTeamViewActive = true;
   }
 
-  async getTeams(): Promise<void> {
-    const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
-
-    this.apiService.getTeams(userToken!);
-    // this.colorMapper();
-    console.log(this.apiService.teams)
+   getTeams():void {
+    this.apiService.getTeams(this.apiService.userToken!);
     this.teams = this.apiService.teams
   }
 
@@ -108,5 +103,12 @@ export class MainPageComponent implements OnInit{
 
   menuAction(): void {
     this.teamService.menuAction();
+  }
+
+  doesUserHaveTeams(): boolean {
+    if(this.teams.length === 0){
+      return false;
+    }
+    return true;
   }
 }
