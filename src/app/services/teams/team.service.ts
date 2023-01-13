@@ -33,7 +33,6 @@ export class TeamService {
   }
 
   getTeamIconBackgroundColor(index: number): string {
-    // this.image!.s = this.teamIconFootball;
     if(this.apiService.teams[index].discipline.name === 'Football'){
       this.dataColor = '#D2F6F6';
     } else if(this.apiService.teams[index].discipline.name === 'Basketball'){

@@ -8,6 +8,7 @@ import { EventDTO, TeamEvent } from 'src/app/models/event';
 import { GetCurrentUserDTO } from 'src/app/models/user';
 import { ChatMsgDTO } from 'src/app/models/chat';
 import firebase from 'firebase/compat/app';
+import { SpinnerService } from '../spinner/spinner.service';
 
 interface User {
   token: string
@@ -47,7 +48,10 @@ export class ApiService {
   public newMessage: ChatMsgDTO = {} as ChatMsgDTO;
   public chatMessages: ChatMsgDTO[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private spinnerService: SpinnerService
+  ) { }
 
   public async getUserToken(): Promise<void> {
     this.userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
@@ -55,21 +59,25 @@ export class ApiService {
 
   public getTeams(token: string): void{
     let headers = new HttpHeaders();
+    this.spinnerService.visibility.next(true);
     headers = headers.set('Content-Type', "application/json").set('idToken', token);
     console.log(headers)
     this.http.get(`${this.API_URL}/team/GetTeams`, {headers: headers})
       .subscribe((res: any) => {
         this.teams = res.teams;
+        this.spinnerService.visibility.next(false);
       });
   }
 
   public createTeam(team: TeamDTO, token: string): void {
     let headers = new HttpHeaders();
+    this.spinnerService.visibility.next(true);
     headers = headers.set('Content-Type', "application/json").set('idToken', token);
     this.http.post(`${this.API_URL}/team/CreateTeam`, team, {headers: headers} )
       .subscribe((res) => {
-        console.log(res);
+        this.spinnerService.visibility.next(false);
     });
+
   }
 
   getTeamDetails(id: number, token: string): void {

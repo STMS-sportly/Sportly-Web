@@ -68,16 +68,11 @@ export class MainPageComponent implements OnInit{
     return this.teamIconFootball;
   }
 
-  goToTeamDetails(index: number): void {
-    // const userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
-    // this.apiService.getDisciplines(this.apiService.userToken!);
-    let teamId : number;
-    teamId = this.teamService.getTeamID(index);
-    this.apiService.getTeamDetails(teamId, this.apiService.userToken!);
-    console.log(this.apiService.teamDetails);
-    this.router.navigateByUrl('team?id=' + teamId);
-    this.apiService.getMonthEvents(teamId, this.apiService.userToken!);
-    this.apiService.getDayEvents(teamId, this.apiService.userToken!);
+  goToTeamDetails(id: number): void {
+    this.apiService.getTeamDetails(id, this.apiService.userToken!);
+    this.router.navigateByUrl('team?id=' + id);
+    this.apiService.getMonthEvents(id, this.apiService.userToken!);
+    this.apiService.getDayEvents(id, this.apiService.userToken!);
     this.teamService.isTeamViewActive = true;
   }
 

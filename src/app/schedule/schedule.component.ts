@@ -11,7 +11,7 @@ import {
 } from '@mobiscroll/angular';
 import firebase from 'firebase/compat/app';
 import { map, Subscription, timer } from 'rxjs';
-import { EventDTO } from '../models/event';
+import { EventDTO, TeamEvent } from '../models/event';
 import { ApiService } from '../services/api/api.service'
 import { TeamService } from '../services/teams/team.service';
 
@@ -36,6 +36,7 @@ export class TeamScheduleComponent {
 
     @ViewChild('popup', { static: false })
     popup!: MbscPopup;
+    timePrefix = "Time"
     popupEventTitle: string | undefined;
     popupEventDescription: string | undefined;
     popupEventAllDay = true;
@@ -72,7 +73,6 @@ export class TeamScheduleComponent {
             this.popupButtons = this.popupEditButtons;
             this.popupAnchor = args.domEvent.currentTarget;
             // open the popup
-            this.teamService.menuAction();
             this.popup.open();
         },
         onEventCreated: (args) => {
@@ -86,7 +86,6 @@ export class TeamScheduleComponent {
                 this.popupButtons = this.popupAddButtons;
                 this.popupAnchor = args.target;
                 // open the popup
-                this.teamService.menuAction();
                 this.popup.open();
             });
         },
@@ -183,7 +182,8 @@ export class TeamScheduleComponent {
     };
 
     loadPopupForm(event: MbscCalendarEvent): void {
-        var ev = this.apiService.teamEvents.find(item => item.id === event.id);
+        var ev = this.apiService.teamEvents.find(item => item.eventId === event['eventId']);
+        var eee = this.getEventById(event);
         this.popupEventTitle = event.title;
         this.popupEventDescription = event['description'];
         this.popupEventDates = event.date;
@@ -225,5 +225,9 @@ export class TeamScheduleComponent {
         this.popup.close();
     }
 
+    getEventById(event: MbscCalendarEvent): TeamEvent{
+      var id = event['eventId']
+      return this.apiService.teamEvents.find(x => x.eventId === id)!
+    }
 
 }
