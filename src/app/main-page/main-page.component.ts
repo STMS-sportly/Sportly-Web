@@ -105,10 +105,9 @@ export class MainPageComponent implements OnInit{
 
   doesUserHaveTeams(): boolean {
     if(this.teams == null || this.teams.length === 0){
+      this.spinnerService.show();
       return false;
     }
     return true;
   }
-
-
 }
