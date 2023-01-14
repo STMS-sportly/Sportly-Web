@@ -18,7 +18,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
 
         return next.handle(req)
              .pipe(tap((event: HttpEvent<any>) => {
-                    if (event instanceof HttpResponse) {
+                    if (event instanceof HttpResponse && req.method === "GET") {
                         this.spinnerService.hide();
                     }
                 }, (error) => {

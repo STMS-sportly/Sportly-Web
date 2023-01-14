@@ -65,5 +65,6 @@ export class CreateTeamComponent implements OnInit, OnDestroy {
     this.apiService.createTeam(this.team, this.apiService.userToken!);
     this.dialogRef.closeAll();
     this.spinnerService.show();
+    this.teamService.getTeamAmount();
   }
 }

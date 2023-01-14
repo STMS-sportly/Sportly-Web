@@ -50,6 +50,7 @@ export class TeamComponent implements OnInit ,OnDestroy {
   deleteTeam(): void {
     this.apiService.deleteTeam(this.apiService.teamDetails.id, this.apiService.userToken!);
     this.router.navigateByUrl('loginPage');
+    this.spinnerService.show();
   }
 
   async removeUserFromTeam(index: number): Promise<void> {

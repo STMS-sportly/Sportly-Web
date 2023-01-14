@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { TeamDTO } from 'src/app/models/team';
 import { team } from 'src/app/users-teams/team-interface';
 import { ApiService } from '../api/api.service';
 
@@ -16,6 +17,7 @@ export class TeamService {
   currentUserRole: string | undefined;
   showAdminButton: BehaviorSubject<boolean>
   public dataColor: any;
+  teamAmount: number | undefined;
 
   constructor(
     public apiService: ApiService
@@ -125,5 +127,13 @@ export class TeamService {
       return;
     }
     this.showAdminButton.next(false);
+  }
+
+  getTeamAmount(): number {
+    if(this.apiService.teams == null){
+      return -1;
+    }
+    this.teamAmount = this.apiService.teams.length;
+    return this.teamAmount;
   }
 }
