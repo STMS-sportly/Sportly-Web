@@ -31,7 +31,6 @@ export class TeamComponent implements OnInit ,OnDestroy {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.userRole = this.teamService.getCurrentUserRole();
     this.timerSubscription = timer(0, 5000).pipe(
       map(() => {
         if(!this.teamService.isModalOpen){
@@ -68,13 +67,6 @@ export class TeamComponent implements OnInit ,OnDestroy {
     this.dialog.open(ChangeRoleDialogComponent);
   }
 
-  isCurrentUserAdmin(): boolean {
-    if(this.userRole === "ProAdmin" || this.userRole === "Admin"){
-      return true;
-    }else{
-      return false;
-    }
-  }
   menuAction(): void {
     this.teamService.menuAction();
   }

@@ -4,7 +4,7 @@ import { map, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth/auth.service';
 import { TeamService } from '../services/teams/team.service';
 import { ApiService} from '../services/api/api.service';
-import { Observable, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
 import firebase from 'firebase/compat/app';
 import { TeamDTO } from '../models/team';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,9 +22,9 @@ export class MainPageComponent implements OnInit{
 
   teams: TeamDTO[] | null = [];
   timerSubscription!: Subscription;
-
+  spinnerColor = "black"
   teamIconFootball: any = "../../assets/ball.png";
-
+  // showTeams: BehaviorSubject<boolean>
 
   constructor(
     public readonly teamService: TeamService,
@@ -32,12 +32,14 @@ export class MainPageComponent implements OnInit{
     public apiService: ApiService,
     private dialogRef: MatDialog,
     public spinnerService: SpinnerService
-  ) { }
+  ) {
+    // this.showTeams = new BehaviorSubject(false)
+   }
 
    async ngOnInit(): Promise<void> {
     this.apiService.getUserToken();
     this.apiService.getCurrentUserData(this.apiService.userToken!);
-    this.timerSubscription = timer(0, 5000).pipe(
+    this.timerSubscription = timer(0, 4000).pipe(
       map(() => {
         if(!this.teamService.isModalOpen){
           this.getTeams();
@@ -77,6 +79,7 @@ export class MainPageComponent implements OnInit{
     this.apiService.getMonthEvents(id, this.apiService.userToken!);
     this.apiService.getDayEvents(id, this.apiService.userToken!);
     this.teamService.isTeamViewActive = true;
+    this.teamService.isCurrentUserAdmin()
   }
 
    getTeams():void {
@@ -104,10 +107,17 @@ export class MainPageComponent implements OnInit{
   }
 
   doesUserHaveTeams(): boolean {
-    if(this.teams == null || this.teams.length === 0){
+    if(this.teams == null){
       this.spinnerService.show();
+      // this.showTeams.next(false);
       return false;
     }
+    if(this.teams != null && this.teams.length === 0){
+      this.spinnerService.hide();
+      // this.showTeams.next(false);
+      return false;
+    }
+    // this.showTeams.next(true);
     return true;
   }
 }

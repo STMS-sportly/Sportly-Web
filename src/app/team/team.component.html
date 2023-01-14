@@ -19,7 +19,7 @@
           <h1 class="names-team-details">
             {{ this.apiService.teamDetails.name }}
           </h1>
-          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="actions" (menuOpened)="menuAction()" (menuClosed)="menuAction()" *ngIf="isCurrentUserAdmin()">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="actions" (menuOpened)="menuAction()" (menuClosed)="menuAction()" *ngIf="teamService.showAdminButton">
             <mat-icon>settings</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
@@ -42,7 +42,7 @@
         <div *ngFor="let member of this.apiService.teamDetails.members; let i = index" class="team-deatails-name-div">
           {{this.apiService.teamDetails.members[i].firstName}}
           {{this.apiService.teamDetails.members[i].lastName}}
-          <button mat-icon-button [matMenuTriggerFor]="menu" class="actions" (menuOpened)="menuAction()" (menuClosed)="menuAction()" *ngIf="isCurrentUserAdmin()">
+          <button mat-icon-button [matMenuTriggerFor]="menu" class="actions" (menuOpened)="menuAction()" (menuClosed)="menuAction()" *ngIf="teamService.showAdminButton">
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">

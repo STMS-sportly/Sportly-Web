@@ -65,19 +65,14 @@ export class ApiService {
     this.http.get(`${this.API_URL}/team/GetTeams`, {headers: headers})
       .subscribe((res: any) => {
         this.teams = res.teams;
-        this.spinnerService.visibility.next(false);
       });
   }
 
   public createTeam(team: TeamDTO, token: string): void {
     let headers = new HttpHeaders();
-    this.spinnerService.visibility.next(true);
     headers = headers.set('Content-Type', "application/json").set('idToken', token);
     this.http.post(`${this.API_URL}/team/CreateTeam`, team, {headers: headers} )
       .subscribe((res) => {
-
-
-        this.spinnerService.visibility.next(false);
     });
 
   }

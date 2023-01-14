@@ -1,7 +1,7 @@
  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"/>
  <div class="main-page-background">
   <app-header></app-header>
-  <mat-spinner [diameter]="100" *ngIf="(spinnerService.visibility | async) && !doesUserHaveTeams()" class="spinner">
+  <mat-spinner [diameter]="100" *ngIf="(spinnerService.visibility | async)" [color]="spinnerColor" class="spinner">
   </mat-spinner>
   <div *ngIf="!doesUserHaveTeams() && !(spinnerService.visibility | async)">
     <div class="no-teams-msg">

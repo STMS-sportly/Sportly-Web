@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { team } from 'src/app/users-teams/team-interface';
 import { ApiService } from '../api/api.service';
 
@@ -13,11 +14,14 @@ export class TeamService {
   isTeamViewActive: boolean = false;
   isModalOpen: boolean = false;
   currentUserRole: string | undefined;
-
+  showAdminButton: BehaviorSubject<boolean>
   public dataColor: any;
+
   constructor(
     public apiService: ApiService
-  ) { }
+  ) {
+    this.showAdminButton = new BehaviorSubject(false);
+  }
 
   isTeamEmpty(): boolean{
     if(this.apiService.teams!.length > 0){
@@ -112,5 +116,14 @@ export class TeamService {
 
   menuAction(): void {
     this.isModalOpen = !this.isModalOpen;
+  }
+
+  isCurrentUserAdmin(): void {
+    var role = this.getCurrentUserRole()
+    if(role === "ProAdmin" || role === "Admin"){
+      this.showAdminButton.next(true);
+      return;
+    }
+    this.showAdminButton.next(false);
   }
 }

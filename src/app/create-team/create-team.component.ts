@@ -5,6 +5,7 @@ import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { TeamService } from '../services/teams/team.service';
+import { SpinnerService } from '../services/spinner/spinner.service';
 
 @Component({
   selector: 'app-create-team',
@@ -29,7 +30,8 @@ export class CreateTeamComponent implements OnInit, OnDestroy {
     public apiService: ApiService,
     private router: Router,
     private dialogRef: MatDialog,
-    public teamService: TeamService
+    public teamService: TeamService,
+    public spinnerService: SpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -62,5 +64,6 @@ export class CreateTeamComponent implements OnInit, OnDestroy {
     this.validateData();
     this.apiService.createTeam(this.team, this.apiService.userToken!);
     this.dialogRef.closeAll();
+    this.spinnerService.show();
   }
 }

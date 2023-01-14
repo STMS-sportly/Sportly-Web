@@ -127,3 +127,7 @@
   left: 50vw;
   position: relative;
 }
+
+.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle {
+  stroke: #212529;
+}
