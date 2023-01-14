@@ -10,22 +10,22 @@ import { ApiService } from '../services/api/api.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent{
+export class ChatComponent implements OnInit{
   @ViewChild("chatContainer", {static: false}) chatContainer!: ElementRef
   messageContent: string = '';
-  currentUserId = this.apiService.currentUser.userId;
+  currentUserId: number | undefined = this.apiService.currentUser.userId;
   constructor(
     public apiService: ApiService
   ) { }
 
+  ngOnInit(): void {
+    this.scrollToBottom();
+    this.currentUserId = this.apiService.currentUser.userId;
+  }
 
-  // ngAfterViewChecked(){
-  //   this.scrollToBottom()
-  // }
 
-  onKey(event: any) { // without type info
+  onKey(event: any) {
     this.messageContent = event.target.value;
-    // console.log(this.apiService.newMessage.message);
   }
 
   clearMessage(): void {

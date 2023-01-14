@@ -36,9 +36,9 @@ export class MainPageComponent implements OnInit{
     // this.showTeams = new BehaviorSubject(false)
    }
 
-   async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.apiService.getUserToken();
-    this.apiService.getCurrentUserData(this.apiService.userToken!);
+
     this.timerSubscription = timer(0, 4000).pipe(
       map(() => {
         if(!this.teamService.isModalOpen){
@@ -46,6 +46,7 @@ export class MainPageComponent implements OnInit{
         }
       })
     ).subscribe();
+    this.apiService.getCurrentUserData(this.apiService.userToken!);
   }
 
   ngOnDestroy(): void {
@@ -80,6 +81,7 @@ export class MainPageComponent implements OnInit{
     this.apiService.getMonthEvents(id, this.apiService.userToken!);
     this.apiService.getDayEvents(id, this.apiService.userToken!);
     this.teamService.isTeamViewActive = true;
+    this.apiService.getCurrentUserData(this.apiService.userToken!);
     this.teamService.isCurrentUserAdmin()
   }
 

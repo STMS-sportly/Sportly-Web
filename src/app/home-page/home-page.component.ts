@@ -32,7 +32,6 @@ export class HomePageComponent{
         tap(() =>
         this.router.navigateByUrl('/loginPage'))
       );
-
       this.spinnerService.visibility.next(true);
   }
 
