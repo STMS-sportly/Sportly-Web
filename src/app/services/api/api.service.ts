@@ -55,14 +55,11 @@ export class ApiService {
   ) { }
 
   public async getUserToken(): Promise<void> {
-
-    this.spinnerService.visibility.next(true);
     this.userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
   }
 
   public getTeams(token: string): void{
     let headers = new HttpHeaders();
-    this.spinnerService.visibility.next(true);
     headers = headers.set('Content-Type', "application/json").set('idToken', token);
     console.log(headers)
     this.http.get(`${this.API_URL}/team/GetTeams`, {headers: headers})

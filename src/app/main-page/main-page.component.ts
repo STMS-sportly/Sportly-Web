@@ -104,7 +104,7 @@ export class MainPageComponent implements OnInit{
   }
 
   doesUserHaveTeams(): boolean {
-    if(this.teams == null){
+    if(this.teams == null || this.teams.length === 0){
       return false;
     }
     return true;
