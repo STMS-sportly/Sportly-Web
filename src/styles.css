@@ -428,6 +428,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html, body { height: 100%; }
 
 .mat-card.mat-card.mat-focus-indicator.mat-elevation-z4 {
+  position: static;
   margin-left: 7vw;
 }
 
@@ -460,4 +461,16 @@ html, body { height: 100%; }
 
 .mat-mdc-tab-group.mat-warn .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-group.mat-warn .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-nav-bar.mat-warn .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-nav-bar.mat-warn .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
   border-color: #1F1F1F;
+}
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: black;
+}
+
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-selected-focus-icon-color: black;
+  --mdc-radio-selected-hover-icon-color: black;
+  --mdc-radio-selected-icon-color: black;
+  --mdc-radio-selected-pressed-icon-color: black;
+  --mat-mdc-radio-checked-ripple-color: black;
 }
