@@ -23,8 +23,9 @@ export class ApiService {
   public userToken: string | undefined;
 
   public event: EventDTO = {} as EventDTO;
+  // public teams: Observable<TeamDTO> | null = null;
   public teamEvents: TeamEvent[] = [];
-  public teams: TeamDTO[] = [];
+  public teams: TeamDTO[] | null = null;
   public teamDetails: TeamDetailsDTO = {
     teamName: '',
     organizationName: '',
@@ -54,6 +55,8 @@ export class ApiService {
   ) { }
 
   public async getUserToken(): Promise<void> {
+
+    this.spinnerService.visibility.next(true);
     this.userToken = await Promise.resolve(firebase.auth().currentUser?.getIdToken(true));
   }
 
@@ -75,6 +78,8 @@ export class ApiService {
     headers = headers.set('Content-Type', "application/json").set('idToken', token);
     this.http.post(`${this.API_URL}/team/CreateTeam`, team, {headers: headers} )
       .subscribe((res) => {
+
+
         this.spinnerService.visibility.next(false);
     });
 

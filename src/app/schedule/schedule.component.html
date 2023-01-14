@@ -1,6 +1,6 @@
 <mbsc-eventcalendar [data]="this.apiService.teamEvents" [options]="calendarOptions" [(selectedDate)]="calendarSelectedDate">
 </mbsc-eventcalendar>
-<mbsc-popup [options]="popupOptions" [anchor]="popupAnchor" [buttons]="popupButtons" [headerText]="popupHeaderText" #popup>
+<mbsc-popup [options]="popupOptions" [anchor]="popupAnchor" [buttons]="popupButtons" [headerText]="popupHeaderText"  #popup>
     <div class="mbsc-form-group">
         <mbsc-input label="Title" [(ngModel)]="popupEventTitle"></mbsc-input>
         <mbsc-textarea label="Description" [(ngModel)]="popupEventDescription"></mbsc-textarea>

@@ -20,7 +20,7 @@ export class TeamService {
   ) { }
 
   isTeamEmpty(): boolean{
-    if(this.apiService.teams.length > 0){
+    if(this.apiService.teams!.length > 0){
       return false;
     }else{
       return true;
@@ -28,18 +28,18 @@ export class TeamService {
   }
 
   getTeamID(index: number): number {
-    this.teamId = this.apiService.teams[index].id;
+    this.teamId = this.apiService.teams![index].id;
     return this.teamId;
   }
 
   getTeamIconBackgroundColor(index: number): string {
-    if(this.apiService.teams[index].discipline.name === 'Football'){
+    if(this.apiService.teams![index].discipline.name === 'Football'){
       this.dataColor = '#D2F6F6';
-    } else if(this.apiService.teams[index].discipline.name === 'Basketball'){
+    } else if(this.apiService.teams![index].discipline.name === 'Basketball'){
       this.dataColor = '#E0F6D2';
-    } else if(this.apiService.teams[index].discipline.name === 'Volleyball'){
+    } else if(this.apiService.teams![index].discipline.name === 'Volleyball'){
       this.dataColor = '#E0D2F6';
-    } else if(this.apiService.teams[index].discipline.name === 'Handball'){
+    } else if(this.apiService.teams![index].discipline.name === 'Handball'){
       this.dataColor = '#E0D2F6';
     }
     else {
@@ -66,9 +66,9 @@ export class TeamService {
 
   isAdmin(index: number): boolean {
     let isUserAdmin = false;
-    if(this.apiService.teams[index].role === "ProAdmin"){
+    if(this.apiService.teams![index].role === "ProAdmin"){
       isUserAdmin = true;
-    }else if(this.apiService.teams[index].role === "Admin"){
+    }else if(this.apiService.teams![index].role === "Admin"){
       isUserAdmin = true;
     }
     return isUserAdmin;
@@ -76,7 +76,7 @@ export class TeamService {
 
   isAssistant(index: number): boolean {
     let isUserAssistant = false;
-    if(this.apiService.teams[index].role === "Assistant"){
+    if(this.apiService.teams![index].role === "Assistant"){
       isUserAssistant = true
     }
     return isUserAssistant;

@@ -16,10 +16,10 @@
             <div class="row">
               <div class="col-sm">
                 <div class="icon-background" [ngStyle]="{'background-color': this.teamService.getTeamIconBackgroundColor(i)}" (click)="goToTeamDetails(team.id)">
-                <div *ngIf="this.apiService.teams[i].discipline.name === 'Football'" class="icon-team">
+                <div *ngIf="this.apiService.teams![i].discipline.name === 'Football'" class="icon-team">
                   <img src="../../assets/ball.png">
                 </div>
-                <div *ngIf="this.apiService.teams[i].discipline.name === 'Basketball'">
+                <div *ngIf="this.apiService.teams![i].discipline.name === 'Basketball'">
                   <img src="../../assets/Basketball.png">
                 </div>
                 </div>

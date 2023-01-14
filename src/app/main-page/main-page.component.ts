@@ -20,7 +20,7 @@ import { SpinnerService } from '../services/spinner/spinner.service';
 })
 export class MainPageComponent implements OnInit{
 
-  teams: TeamDTO[] = [];
+  teams: TeamDTO[] | null = [];
   timerSubscription!: Subscription;
 
   teamIconFootball: any = "../../assets/ball.png";
@@ -60,6 +60,9 @@ export class MainPageComponent implements OnInit{
   }
 
   getTeamIcon(index: number): string {
+    if(this.teams == null){
+      return ""
+    }
     if(this.teams[index].discipline.name === 'football'){
       this.teamIconFootball = '../../assets/ball.png';
     } else if(this.teams[index].discipline.name === 'basketball'){
@@ -101,9 +104,11 @@ export class MainPageComponent implements OnInit{
   }
 
   doesUserHaveTeams(): boolean {
-    if(this.teams.length === 0){
+    if(this.teams == null){
       return false;
     }
     return true;
   }
+
+
 }

@@ -196,7 +196,7 @@ export class TeamScheduleComponent {
         this.tempEvent['description'] = this.popupEventDescription!;
         this.tempEvent.date = this.popupEventDates[0];
         this.tempEvent['time'] = this.popupEventTime;
-
+        console.log(this.popupEventTime)
         this.newEvent.title = this.popupEventTitle!;
         this.newEvent.description = this.popupEventDescription!;
         this.newEvent.eventDate = this.popupEventDates[0];
