@@ -145,7 +145,7 @@ export class TeamScheduleComponent {
       this.popupEventTitle = events!.title
       this.popupEventDescription = events!.description;
       if(this.isEdit){
-        this.popupEventDates = events!.eventDate;
+        this.popupEventDates = event.date;
         this.popupEventTime = this.calendarSelectedHour;
       }else {
         this.popupEventDates = this.calendarSelectedDate;
