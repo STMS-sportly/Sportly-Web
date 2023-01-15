@@ -53,10 +53,12 @@ export class CreateTeamComponent implements OnInit, OnDestroy {
 
   onChangeType(event: any) {
     this.team.teamType = event.value;
+    this.validateData();
  }
 
   onChangeDiscipline(event: any) {
     this.team.discipline.name = event.value;
+    this.validateData();
   }
 
   createTeam(): void {
