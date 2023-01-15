@@ -200,7 +200,6 @@ export class TeamScheduleComponent {
         }
 
         this.clickedEventId = ev?.eventId!
-        this.teamService.menuAction();
     }
     saveEvent(): void {
         this.tempEvent.title = this.popupEventTitle!;
@@ -220,7 +219,6 @@ export class TeamScheduleComponent {
           this.calendarSelectedHour = this.popupEventTime;
           this.apiService.createEvent(this.apiService.teamDetails.id, this.newEvent.eventDate, this.newEvent.title, this.newEvent.description!, this.apiService.userToken!);
         }
-        this.teamService.menuAction();
         this.popup.close();
     }
     deleteEvent(event: MbscCalendarEvent): void {
@@ -231,7 +229,6 @@ export class TeamScheduleComponent {
       }
     onDeleteClick(): void {
         this.deleteEvent(this.tempEvent);
-        this.teamService.menuAction();
         this.popup.close();
     }
 

@@ -24,7 +24,6 @@ export class MainPageComponent implements OnInit{
   timerSubscription!: Subscription;
   spinnerColor = "black"
   teamIconFootball: any = "../../assets/ball.png";
-  // showTeams: BehaviorSubject<boolean>
 
   constructor(
     public readonly teamService: TeamService,
@@ -32,9 +31,7 @@ export class MainPageComponent implements OnInit{
     public apiService: ApiService,
     private dialogRef: MatDialog,
     public spinnerService: SpinnerService
-  ) {
-    // this.showTeams = new BehaviorSubject(false)
-   }
+  ) {}
 
   ngOnInit(): void {
     this.apiService.getUserToken();
@@ -46,7 +43,6 @@ export class MainPageComponent implements OnInit{
         }
       })
     ).subscribe();
-    this.apiService.getCurrentUserData(this.apiService.userToken!);
   }
 
   ngOnDestroy(): void {
@@ -79,15 +75,16 @@ export class MainPageComponent implements OnInit{
     this.teamService.teamId = id;
     this.router.navigateByUrl('team?id=' + id);
     this.apiService.getTeamEvents(id, this.apiService.userToken!);
-    // this.apiService.getDayEvents(id, this.apiService.userToken!);
     this.teamService.isTeamViewActive = true;
-    this.apiService.getCurrentUserData(this.apiService.userToken!);
     this.teamService.isCurrentUserAdmin()
   }
 
    getTeams():void {
     this.apiService.getTeams(this.apiService.userToken!);
     this.teams = this.apiService.teams
+    if(this.apiService.currentUser.userId == null){
+      this.apiService.getCurrentUserData(this.apiService.userToken!)
+    }
   }
 
   async getIvitationCode(index: number): Promise<void> {
