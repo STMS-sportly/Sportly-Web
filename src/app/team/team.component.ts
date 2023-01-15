@@ -31,11 +31,11 @@ export class TeamComponent implements OnInit ,OnDestroy {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.timerSubscription = timer(0, 5000).pipe(
+    this.timerSubscription = timer(0, 500).pipe(
       map(() => {
         if(!this.teamService.isModalOpen){
           this.apiService.getMessages(this.teamId!, this.apiService.userToken!);
-          this.apiService.getMonthEvents(this.teamId!, this.apiService.userToken!);
+          this.apiService.getTeamEvents(this.teamId!, this.apiService.userToken!);
           this.apiService.getTeamDetails(this.teamId!, this.apiService.userToken!);
         }
       })

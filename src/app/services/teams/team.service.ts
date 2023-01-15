@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { TeamDTO } from 'src/app/models/team';
-import { team } from 'src/app/users-teams/team-interface';
 import { ApiService } from '../api/api.service';
 
 @Injectable({

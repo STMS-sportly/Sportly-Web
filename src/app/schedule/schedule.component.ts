@@ -141,15 +141,16 @@ export class TeamScheduleComponent {
     isEdit = false;
 
     loadPopupForm(event: MbscCalendarEvent): void {
-        this.popupEventTitle = event.title;
-        this.popupEventDescription = event.description;
-        if(this.isEdit){
-          this.popupEventDates = event.date;
-          this.popupEventTime = this.calendarSelectedHour;
-        }else {
-          this.popupEventDates = this.calendarSelectedDate;
-          this.popupEventTime = this.calendarSelectedHour;
-        }
+      var events = this.apiService.teamEvents.find(x => x.id === event.id);
+      this.popupEventTitle = events!.title
+      this.popupEventDescription = events!.description;
+      if(this.isEdit){
+        this.popupEventDates = events!.eventDate;
+        this.popupEventTime = this.calendarSelectedHour;
+      }else {
+        this.popupEventDates = this.calendarSelectedDate;
+        this.popupEventTime = this.calendarSelectedHour;
+      }
 
     }
     saveEvent(): void {

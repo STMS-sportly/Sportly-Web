@@ -182,7 +182,6 @@ export class ApiService {
     params = params.append('date', new Date().toDateString());
     this.http.get(`${this.API_URL}/schedule/GetMonthEvents/` + teamId, {headers: headers, params: params})
     .subscribe((res: any) => {
-      this.teamEvents = res.events;
       console.log(res);
       console.log(this.teamEvents)
     });
@@ -195,6 +194,16 @@ export class ApiService {
     params = params.append('date', new Date().toDateString());
     this.http.get(`${this.API_URL}/schedule/GetDayEvents/` + teamId, {headers: headers, params: params})
     .subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  getTeamEvents(teamId: number, token: string): void {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', "application/json").set('idToken', token);
+    this.http.get(`${this.API_URL}/schedule/GetAllTeamEvents/` + teamId, {headers: headers})
+    .subscribe((res: any) => {
+      this.teamEvents = res.events;
       console.log(res);
     });
   }
