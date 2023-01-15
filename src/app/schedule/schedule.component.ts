@@ -128,7 +128,6 @@ export class TeamScheduleComponent {
         fullScreen: true,
         onClose: () => {
             if (!this.isEdit) {
-                // refresh the list, if add popup was canceled, to remove the temporary event
                 this.myEvents = [...this.myEvents];
             }
         },
@@ -190,7 +189,6 @@ export class TeamScheduleComponent {
         }else{
           this.popupEventDescription = ""
         }
-
         if(this.isEdit){
           this.popupEventDates = event.date;
           this.popupEventTime = this.calendarSelectedHour;
@@ -227,21 +225,14 @@ export class TeamScheduleComponent {
         console.log(Number(teamEventIndex) - 1);
         this.apiService.deleteEvent(this.apiService.teamDetails.id, ev!.eventId, this.apiService.userToken!);
       }
-    onDeleteClick(): void {
+
+      onDeleteClick(): void {
         this.deleteEvent(this.tempEvent);
         this.popup.close();
     }
 
-    getEventById(event: MbscCalendarEvent): EventDTO{
-      var id = event['eventId']
-      return this.apiService.teamEvents.find(x => x.eventId === id)!
-    }
-
     onChangeTime(event: any){
       this.popupEventTime = event.value;
-      var date = Date.parse(this.popupEventTime)
-      // date.
-      console.log(this.popupEventTime);
     }
 
     onChangeDate(event: any){

@@ -9,8 +9,6 @@ import firebase from 'firebase/compat/app';
 import { TeamDTO } from '../models/team';
 import { MatDialog } from '@angular/material/dialog';
 import { ValidationCodePopUpComponent } from '../validation-code-pop-up/validation-code-pop-up.component';
-import { CreateTeamComponent } from '../create-team/create-team.component';
-import { ValidationCodeComponent } from '../validation-code/validation-code.component';
 import { SpinnerService } from '../services/spinner/spinner.service';
 
 @Component({
@@ -109,15 +107,12 @@ export class MainPageComponent implements OnInit{
   doesUserHaveTeams(): boolean {
     if(this.teams == null){
       this.spinnerService.show();
-      // this.showTeams.next(false);
       return false;
     }
     if(this.teams != null && this.teams.length === 0){
       this.spinnerService.hide();
-      // this.showTeams.next(false);
       return false;
     }
-    // this.showTeams.next(true);
     return true;
   }
 }
