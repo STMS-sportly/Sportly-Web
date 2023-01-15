@@ -12,6 +12,7 @@ import {
 import firebase from 'firebase/compat/app';
 import { map, Subscription, timer } from 'rxjs';
 import { EventDTO, TeamEvent } from '../models/event';
+import { TeamDTO } from '../models/team';
 import { ApiService } from '../services/api/api.service'
 import { TeamService } from '../services/teams/team.service';
 
@@ -38,18 +39,12 @@ export class TeamScheduleComponent {
     popup!: MbscPopup;
     timePrefix = "Time"
     popupEventTitle: string | undefined;
-    popupEventDescription: string | undefined;
+    popupEventDescription: string | undefined = "";
     popupEventAllDay = true;
     popupEventDates: any;
     popupEventTime: any;
-    popupEventStatus = 'busy';
     calendarSelectedDate: any = new Date();
-    calendarSelectedHour: any;
-    switchLabel: any = 'All-day';
-    tempColor = '';
-    selectedColor = '';
-    colorAnchor: HTMLElement | undefined;
-    colors = ['#ffeb3c', '#ff9900', '#f44437', '#ea1e63', '#9c26b0', '#3f51b5', '', '#009788', '#4baf4f', '#7e5d4e'];
+    calendarSelectedHour: any = new Date();
     myEvents: MbscCalendarEvent[] = [];
     clickedEventId: number = -1;
     teamEvents = this.apiService.teamEvents;
@@ -66,26 +61,21 @@ export class TeamScheduleComponent {
         onEventClick: (args) => {
             this.isEdit = true;
             this.tempEvent = args.event;
-            // fill popup form with event data
             this.loadPopupForm(args.event);
-            // set popup options
             this.popupHeaderText = 'Edit event';
             this.popupButtons = this.popupEditButtons;
             this.popupAnchor = args.domEvent.currentTarget;
-            // open the popup
             this.popup.open();
         },
         onEventCreated: (args) => {
             setTimeout(() => {
                 this.isEdit = false;
                 this.tempEvent = args.event;
-                // fill popup form with event data
                 this.loadPopupForm(args.event);
-                // set popup options
                 this.popupHeaderText = 'New Event';
+                this.popupEventDescription = '';
                 this.popupButtons = this.popupAddButtons;
                 this.popupAnchor = args.target;
-                // open the popup
                 this.popup.open();
             });
         },
@@ -93,14 +83,7 @@ export class TeamScheduleComponent {
             setTimeout(() => {
                 this.deleteEvent(args.event);
             });
-        },
-        onEventUpdated: (args) => {
-            // here you can update the event in your storage as well, after drag & drop or resize
-            // ...
-        },
-        onPageChange(args, inst) {
-
-        },
+        }
     };
     popupHeaderText!: string;
     popupAnchor: HTMLElement | undefined;
@@ -126,10 +109,6 @@ export class TeamScheduleComponent {
         contentPadding: false,
         fullScreen: true,
         onClose: () => {
-            if (!this.isEdit) {
-                // refresh the list, if add popup was canceled, to remove the temporary event
-                this.myEvents = [...this.myEvents];
-            }
         },
         responsive: {
             medium: {
@@ -160,57 +139,32 @@ export class TeamScheduleComponent {
         touchUi: true
     };
     isEdit = false;
-    colorOptions: MbscPopupOptions = {
-        display: 'bottom',
-        contentPadding: false,
-        showArrow: false,
-        showOverlay: false,
-        buttons: [
-            'cancel',
-            {
-                text: 'Set',
-                keyCode: 'enter',
-                cssClass: 'mbsc-popup-button-primary'
-            }
-        ],
-        responsive: {
-            medium: {
-                display: 'anchored',
-                buttons: [],
-            }
-        }
-    };
 
     loadPopupForm(event: MbscCalendarEvent): void {
-        var ev = this.apiService.teamEvents.find(item => item.eventId === event['eventId']);
-        var eee = this.getEventById(event);
         this.popupEventTitle = event.title;
-        this.popupEventDescription = event['description'];
-        this.popupEventDates = event.date;
-        this.popupEventTime = event['time'];
-        this.clickedEventId = ev?.eventId!
-        this.teamService.menuAction();
+        this.popupEventDescription = event.description;
+        if(this.isEdit){
+          this.popupEventDates = event.date;
+          this.popupEventTime = this.calendarSelectedHour;
+        }else {
+          this.popupEventDates = this.calendarSelectedDate;
+          this.popupEventTime = this.calendarSelectedHour;
+        }
+
     }
     saveEvent(): void {
-        this.tempEvent.title = this.popupEventTitle!;
-        this.tempEvent['description'] = this.popupEventDescription!;
-        this.tempEvent.date = this.popupEventDates[0];
-        this.tempEvent['time'] = this.popupEventTime;
-        console.log(this.popupEventTime)
         this.newEvent.title = this.popupEventTitle!;
         this.newEvent.description = this.popupEventDescription!;
-        this.newEvent.eventDate = this.popupEventDates[0];
-
-        if (this.isEdit) {
-            this.myEvents = [...this.myEvents];
+        this.setEventDate()
+         if (this.isEdit) {
+            this.calendarSelectedDate = this.popupEventDates[0];
+            this.calendarSelectedHour = this.popupEventTime;
             this.apiService.updateEvent(this.apiService.teamDetails.id, this.clickedEventId, this.newEvent, this.apiService.userToken!)
         } else {
-          this.myEvents = [...this.myEvents, this.tempEvent];
           this.calendarSelectedDate = this.popupEventDates[0];
+          this.calendarSelectedHour = this.popupEventTime;
           this.apiService.createEvent(this.apiService.teamDetails.id, this.newEvent.eventDate, this.newEvent.title, this.newEvent.description!, this.apiService.userToken!);
         }
-        this.teamService.menuAction();
-        // navigate the calendar
         this.popup.close();
     }
     deleteEvent(event: MbscCalendarEvent): void {
@@ -218,16 +172,31 @@ export class TeamScheduleComponent {
         var teamEventIndex = event.id!.toString().replace(/\D/g, "");
         console.log(Number(teamEventIndex) - 1);
         this.apiService.deleteEvent(this.apiService.teamDetails.id, ev!.eventId, this.apiService.userToken!);
-      }
+    }
+
     onDeleteClick(): void {
         this.deleteEvent(this.tempEvent);
-        this.teamService.menuAction();
         this.popup.close();
     }
 
-    getEventById(event: MbscCalendarEvent): TeamEvent{
-      var id = event['eventId']
-      return this.apiService.teamEvents.find(x => x.eventId === id)!
+    onChangeTime(event: any){
+      this.popupEventTime = event.value;
+    }
+
+    onChangeDate(event: any){
+      this.popupEventDates = event.valueText
+    }
+
+    setEventDate(): void {
+      var eventDate: Date = new Date(this.popupEventDates[0]);
+      var eventTime: Date = new Date(this.popupEventTime);
+      var day = eventDate.getDate();
+      var month = eventDate.getMonth();
+      var year = eventDate.getFullYear();
+      var hour = eventTime.getHours();
+      var minutes = eventTime.getMinutes();
+      this.newEvent.eventDate = new Date(year, month, day, hour, minutes).toISOString()
+      this.tempEvent.date = new Date(year, month, day, hour, minutes).toISOString()
     }
 
 }

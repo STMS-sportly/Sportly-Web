@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { TeamDetailsDTO, TeamDTO } from 'src/app/models/team';
@@ -9,6 +9,8 @@ import { GetCurrentUserDTO } from 'src/app/models/user';
 import { ChatMsgDTO } from 'src/app/models/chat';
 import firebase from 'firebase/compat/app';
 import { SpinnerService } from '../spinner/spinner.service';
+import { errorPrefix } from '@firebase/util';
+import { ErrorService } from '../error/error.service';
 
 interface User {
   token: string
@@ -23,8 +25,8 @@ export class ApiService {
   public userToken: string | undefined;
 
   public event: EventDTO = {} as EventDTO;
-  // public teams: Observable<TeamDTO> | null = null;
-  public teamEvents: TeamEvent[] = [];
+  public errorMessage: string | null = "";
+  public teamEvents: EventDTO[] = [];
   public teams: TeamDTO[] | null = null;
   public teamDetails: TeamDetailsDTO = {
     teamName: '',
@@ -110,8 +112,12 @@ export class ApiService {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', "application/json").set('idToken', token);
     this.http.post(`${this.API_URL}/team/JoinTeam`, {"code": code}, {headers: headers} )
-      .subscribe((res) => {
+      .subscribe(
+        (res) => {
         console.log(res);
+        this.errorMessage = null;
+    }, (error: HttpErrorResponse) => {
+        this.errorMessage = "Wrong code inserted!"
     });
   }
 

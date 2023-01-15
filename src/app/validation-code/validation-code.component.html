@@ -8,6 +8,9 @@
         <div class="card">
           <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" *ngIf="showOtpComponent" [config]="config"></ng-otp-input>
         </div>
+        <div *ngIf="this.apiService.errorMessage">
+          <h3 class="error-message">{{this.apiService.errorMessage}}</h3>
+        </div>
       </div>
     </div>
   </div>

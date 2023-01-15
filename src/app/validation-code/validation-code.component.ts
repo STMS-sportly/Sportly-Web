@@ -4,6 +4,7 @@ import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { TeamService } from '../services/teams/team.service';
+import { ErrorService } from '../services/error/error.service';
 
 @Component({
   selector: 'app-validation-code',
@@ -17,9 +18,9 @@ export class ValidationCodeComponent implements OnDestroy{
 
   constructor(
     public apiService: ApiService,
-    private readonly router: Router,
     public dialogRef: MatDialog,
-    public teamService: TeamService
+    public teamService: TeamService,
+    public errorService: ErrorService
   ) { }
 
   ngOnDestroy(): void {
@@ -62,7 +63,7 @@ export class ValidationCodeComponent implements OnDestroy{
     }
   }
 
-  onConfigChange() {
+  onConfigChange(): void {
     this.showOtpComponent = false;
     this.otp = null;
     setTimeout(() => {
@@ -70,9 +71,10 @@ export class ValidationCodeComponent implements OnDestroy{
     }, 0);
   }
 
-  async joinTeam(): Promise<void> {
+  joinTeam(): void {
     this.apiService.joinTeam(this.otp!, this.apiService.userToken!);
-
-    this.dialogRef.closeAll();
+    if(this.apiService.errorMessage == null){
+      this.dialogRef.closeAll();
+    }
   }
 }

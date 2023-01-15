@@ -1,12 +1,15 @@
 <mbsc-eventcalendar [data]="this.apiService.teamEvents" [options]="calendarOptions" [(selectedDate)]="calendarSelectedDate">
 </mbsc-eventcalendar>
-<mbsc-popup [options]="popupOptions" [anchor]="popupAnchor" [buttons]="popupButtons" [headerText]="popupHeaderText"  #popup>
+<mbsc-popup [options]="popupOptions" [anchor]="popupAnchor" [buttons]="popupButtons" [headerText]="popupHeaderText" #popup (onOpen)="this.teamService.menuAction()" (onClose)="this.teamService.menuAction()">
     <div class="mbsc-form-group">
         <mbsc-input label="Title" [(ngModel)]="popupEventTitle"></mbsc-input>
         <mbsc-textarea label="Description" [(ngModel)]="popupEventDescription"></mbsc-textarea>
-        <mbsc-datepicker [(ngModel)]="popupEventDates" [options]="datePickerOptions" [controls]="popupEventAllDay ? datePickerControls : datetimePickerControls" [responsive]="popupEventAllDay ? datePickerResponsive : datetimePickerResponsive" [startInput]="startInput"></mbsc-datepicker>
+        <mbsc-datepicker [(ngModel)]="popupEventDates" [options]="datePickerOptions" (onchange)="onChangeDate($event)" [controls]="popupEventAllDay ? datePickerControls : datetimePickerControls" [responsive]="popupEventAllDay ? datePickerResponsive : datetimePickerResponsive" [startInput]="startInput"></mbsc-datepicker>
         <mbsc-input #startInput label="Date"></mbsc-input>
-        <mbsc-time label="Time" [(ngModel)]="popupEventTime"></mbsc-time>
+        <div>
+          <mbsc-time label="Time" [(ngModel)]="popupEventTime" (onChange)="onChangeTime($event)"><label>Time</label></mbsc-time>
+        </div>
+
         <div *ngIf="isEdit" class="mbsc-button-group">
             <mbsc-button class="mbsc-button-block" color="danger" variant="outline" (click)="onDeleteClick()">Delete event
             </mbsc-button>

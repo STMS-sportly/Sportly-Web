@@ -36,7 +36,6 @@ export class HeaderComponent{
       .pipe(
         tap(() => this.router.navigateByUrl(''))
       )
-    this.apiService.userToken = "";
   }
 
   async goToCreateTeam(): Promise<void> {

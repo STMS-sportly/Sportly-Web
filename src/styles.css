@@ -474,3 +474,7 @@ html, body { height: 100%; }
   --mdc-radio-selected-pressed-icon-color: black;
   --mat-mdc-radio-checked-ripple-color: black;
 }
+
+.error-message{
+  color: red;
+}

@@ -49,6 +49,7 @@ import { CustomHttpInterceptor } from './http-interceptor';
 import { NgChatModule } from 'ng-chat';
 import { QRCodeModule } from 'angularx-qrcode';
 import { QrCodeComponent } from './qr-code/qr-code.component';
+import { ErrorHandlerComponent } from './error-handler/error-handler.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { QrCodeComponent } from './qr-code/qr-code.component';
     NewEventDialogComponent,
     EditTeamInfoComponent,
     ChangeRoleDialogComponent,
-    QrCodeComponent
+    QrCodeComponent,
+    ErrorHandlerComponent
   ],
   imports: [
     MbscModule,

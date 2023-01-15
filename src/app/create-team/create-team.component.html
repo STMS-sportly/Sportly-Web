@@ -6,7 +6,7 @@
   <br><br>
   <mat-form-field appearance="fill">
     <mat-label>Team name</mat-label>
-    <input matInput [(ngModel)]="team.teamName">
+    <input matInput [(ngModel)]="team.teamName" (change)="validateData()">
   </mat-form-field>
   <br>
   <mat-form-field appearance="fill" >
