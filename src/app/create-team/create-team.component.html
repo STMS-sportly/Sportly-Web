@@ -26,7 +26,7 @@
     <input matInput [(ngModel)]="team.location">
   </mat-form-field>
   <br>
-  <button mat-stroked-button color="black" disabled={{createTeamDisabled}} (click)="createTeam()">Create team</button>
+  <button mat-stroked-button color="black" [disabled]="createTeamDisabled" (click)="createTeam()">Create team</button>
 </div>
 
 
