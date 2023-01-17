@@ -22,6 +22,15 @@
                 <div *ngIf="this.apiService.teams![i].discipline.name === 'Basketball'">
                   <img src="../../assets/Basketball.png">
                 </div>
+                <div *ngIf="this.apiService.teams![i].discipline.name === 'Handball'">
+                  <img src="../../assets/handball.png" class="icon-team-details">
+                </div>
+                <div *ngIf="this.apiService.teams![i].discipline.name === 'Volleyball'" >
+                  <img src="../../assets/Volleyball.png" class="icon-team-details">
+                </div>
+                <div *ngIf="this.apiService.teams![i].discipline.name === 'Jogging'">
+                  <img src="../../assets/jogging.png" class="icon-team-details">
+                </div>
                 </div>
               </div>
               <div class="col-sm">

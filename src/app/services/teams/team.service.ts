@@ -42,9 +42,11 @@ export class TeamService {
     } else if(this.apiService.teams![index].discipline.name === 'Basketball'){
       this.dataColor = '#E0F6D2';
     } else if(this.apiService.teams![index].discipline.name === 'Volleyball'){
-      this.dataColor = '#E0D2F6';
+      this.dataColor = '#F6F3D2';
     } else if(this.apiService.teams![index].discipline.name === 'Handball'){
       this.dataColor = '#E0D2F6';
+    } else if(this.apiService.teams![index].discipline.name === 'Jogging'){
+      this.dataColor = '#F6DFD2';
     }
     else {
       this.dataColor = '';
@@ -58,9 +60,11 @@ export class TeamService {
     } else if(this.apiService.teamDetails.discipline.name === 'Basketball'){
       this.dataColor = '#E0F6D2';
     } else if(this.apiService.teamDetails.discipline.name === 'Volleyball'){
-      this.dataColor = '#E0D2F6';
+      this.dataColor = '#F6F3D2';
     } else if(this.apiService.teamDetails.discipline.name === 'Handball'){
       this.dataColor = '#E0D2F6';
+    } else if(this.apiService.teamDetails.discipline.name === 'Jogging'){
+      this.dataColor = '#F6DFD2';
     }
     else {
       this.dataColor = '';

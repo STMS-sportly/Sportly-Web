@@ -70,7 +70,7 @@ import { ErrorHandlerComponent } from './error-handler/error-handler.component';
     QrCodeComponent,
     ErrorHandlerComponent
   ],
-  imports: [
+  imports: [ 
     MbscModule,
     QRCodeModule,
     MatProgressSpinnerModule,

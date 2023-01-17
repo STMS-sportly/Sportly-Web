@@ -127,3 +127,8 @@
   color: #000000;
   border-color: #000000;
 }
+
+.header-logo{
+  top: 2vh;
+  position: relative;
+}
