@@ -1,45 +1,85 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"/>
 
-<div class="container-fluid h-15" id="login-page-simple-header">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3" id="login-page-simple-header">
+	<div class="container-fluid">
+		<a class="navbar-brand" [routerLink]="'.'">
+      <img class="header-logo" src="./../../assets/horizontal-logo.png" (click)="goToMainPage()">
+    </a>
+
+		<!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
+		<button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
+
+		<!-- Step 2: Add the ngbCollapse directive to the element below. -->
+		<div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<!-- Step 4: Close the menu when a link is clicked. -->
+					<a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">
+            <div *ngIf="!this.teamService.isTeamViewActive">
+              <button class="header-btn" (click)="goToCreateTeam()">
+                Create a team
+              </button>
+            </div>
+          </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">
+            <div *ngIf="!this.teamService.isTeamViewActive">
+              <button class="header-btn" (click)="goToJoinTeam()">
+                Join a team
+              </button>
+            </div>
+          </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">
+            <button [matMenuTriggerFor]="menu" class="header-btn">Menu</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="goToMyAccountInfo()">My Account</button>
+              <button mat-menu-item (click)="logout()">Log out</button>
+            </mat-menu>
+          </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+<!-- <div class="container-fluid h-15" id="login-page-simple-header">
   <div class="row h-15"  *ngIf="user$ | async as user; else loading">
     <div class="col-sm-2 h-15">
-      <!-- <h1 class="header-app-name" (click)="goToMainPage()">SPORTLY</h1> -->
       <img class="header-logo" src="./../../assets/horizontal-logo.png" (click)="goToMainPage()">
     </div>
     <div class="col-sm-4"></div>
-    <div class="col-sm-2 h-15" >
-      <div *ngIf="!this.teamService.isTeamViewActive">
-        <button class="header-btn" (click)="goToCreateTeam()">
-          Create a team
-        </button>
-      </div>
+    <div>
+      <div class="col-sm-2 h-15" >
+        <div *ngIf="!this.teamService.isTeamViewActive">
+          <button class="header-btn" (click)="goToCreateTeam()">
+            Create a team
+          </button>
+        </div>
 
-    </div>
-    <div class="col-sm-2 h-15" >
-      <div *ngIf="!this.teamService.isTeamViewActive">
-        <button class="header-btn" (click)="goToJoinTeam()">
-          Join a team
-        </button>
       </div>
+      <div class="col-sm-2 h-15" >
+        <div *ngIf="!this.teamService.isTeamViewActive">
+          <button class="header-btn" (click)="goToJoinTeam()">
+            Join a team
+          </button>
+        </div>
 
+      </div>
+      <div class="col-sm-2 h-15">
+        <button [matMenuTriggerFor]="menu" class="header-btn">Menu</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item class="invite-button" (click)="goToMyAccountInfo()">My Account</button>
+          <button mat-menu-item class="leave-button" (click)="logout()">Log out</button>
+        </mat-menu>
+      </div>
     </div>
-    <div class="col-sm-2 h-15">
-      <button [matMenuTriggerFor]="menu" class="header-btn">Menu</button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item class="invite-button" (click)="goToMyAccountInfo()">My Account</button>
-        <button mat-menu-item class="leave-button" (click)="logout()">Log out</button>
-      </mat-menu>
-    </div>
-    <!-- <div class="col-sm-2 h-15">
-      <button id="account-btn" (click)="goToMyAccountInfo()">My Account</button>
-    </div>
-    <div class="col-sm-2 h-15">
-      <button id="logout-btn" (click)="logout()">Log out</button>
-    </div>
-  </div> -->
 </div>
 
 <ng-template #loading>
   <h1>Loading...</h1>
 </ng-template>
-<ng-container *ngIf="logout$ | async"></ng-container>
+<ng-container *ngIf="logout$ | async"></ng-container> -->

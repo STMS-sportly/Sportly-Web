@@ -3,7 +3,6 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { HomePageComponent } from '../home-page/home-page.component';
 import { AuthService } from '../services/auth/auth.service';
 import { TeamService } from '../services/teams/team.service';
 import firebase from 'firebase/compat/app';
@@ -21,6 +20,7 @@ export class HeaderComponent{
 
   user$ = this.authService.user$;
   logout$!: Observable<any>
+  isMenuCollapsed = true;
 
   constructor(
     public angularFireAuth: AngularFireAuth,

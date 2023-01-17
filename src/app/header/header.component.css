@@ -14,8 +14,8 @@
   position: absolute;
   height: 105px;
   top: 0px;
-
-  background: #FFFFFF;
+  width: 100%;
+  background: #f8f9fa!important;
   border: 1px solid #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   z-index: 0;
@@ -94,7 +94,7 @@
   top: 19px;
   height: 64px;
   font-weight: 100;
-  position: absolute;
+  position: relative;
   color: #FFFFFF;
   background: #000000;
   border: 1px solid #000000;
@@ -110,15 +110,15 @@
 .header-btn{
   box-sizing: border-box;
   font: Mukta;
-  font-size: large;
-  width: 10vw;
+  font-size: x-large;
+  width: 200px;
   top: 19px;
   height: 6vh;
   font-weight: 100;
-  position: absolute;
-  color: #FFFFFF;
-  background: #000000;
-  border: 1px solid #000000;
+  position: relative;
+  color: #000000;
+  background: #f8f9fa!important;
+  border: 1px solid #f8f9fa!important;
   border-radius: 8px;
 }
 
@@ -132,3 +132,4 @@
   top: 2vh;
   position: relative;
 }
+

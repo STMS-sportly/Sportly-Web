@@ -50,6 +50,7 @@ import { NgChatModule } from 'ng-chat';
 import { QRCodeModule } from 'angularx-qrcode';
 import { QrCodeComponent } from './qr-code/qr-code.component';
 import { ErrorHandlerComponent } from './error-handler/error-handler.component';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -70,8 +71,9 @@ import { ErrorHandlerComponent } from './error-handler/error-handler.component';
     QrCodeComponent,
     ErrorHandlerComponent
   ],
-  imports: [ 
+  imports: [
     MbscModule,
+    NgbCollapseModule,
     QRCodeModule,
     MatProgressSpinnerModule,
     BrowserModule,
