@@ -34,7 +34,7 @@ export class MainPageComponent implements OnInit{
   ngOnInit(): void {
     this.apiService.getUserToken();
 
-    this.timerSubscription = timer(0, 42000).pipe(
+    this.timerSubscription = timer(0, 4200).pipe(
       map(() => {
         if(!this.teamService.isModalOpen){
           this.getTeams();

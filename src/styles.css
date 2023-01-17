@@ -135,7 +135,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   /* position: absolute; */
   /* width: 450px; */
-  height: 850px;
+  height: 780px;
   /* left: 8vw; */
   top: 14vh;
 
@@ -144,6 +144,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   align-items: center;
   float: left;
+  z-index: 0;
 }
 
 .team-col-2{
@@ -151,7 +152,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   /* position: absolute; */
   /* width: 450px; */
-  height: 850px;
+  height: 780px;
   /* left: 38vw; */
   top: 14vh;
 
@@ -160,6 +161,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   align-items: center;
   float: left;
+  z-index: 0;
 }
 
 .team-col-3{
@@ -456,7 +458,12 @@ html, body { height: 100%; }
   border-color: var(--mdc-elevated-card-container-color, transparent);
   margin-left: 150px;
   margin-top: 150px;
-  height: 18vh;
+  height: 200px;
+  width: 280px;
+}
+
+.mat-mdc-card:hover{
+  border-color: #1F1F1F;
 }
 
 .mat-mdc-tab-group.mat-warn .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-group.mat-warn .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-nav-bar.mat-warn .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-nav-bar.mat-warn .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
@@ -477,4 +484,16 @@ html, body { height: 100%; }
 
 .error-message{
   color: red;
+}
+
+.mdc-icon-button-teams{
+  position: relative;
+  left: 60px;
+}
+
+@media (min-width: 992px){
+  .col-lg-2{
+  flex: 0 0 16.6667%;
+  max-width: 100%;
+}
 }
