@@ -497,3 +497,12 @@ html, body { height: 100%; }
   max-width: 100%;
 }
 }
+
+.navbar-light .navbar-toggler{
+  top: 2vh;
+  border-color: #f8f9fa!important;
+  position: relative;
+  height: 60px;
+  /* width: 70px; */
+  color: black;
+}

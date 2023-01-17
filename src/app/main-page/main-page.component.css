@@ -131,3 +131,12 @@
 .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle {
   stroke: #212529;
 }
+
+.team-icon{
+ right: 0;
+ position: relative;
+}
+
+.col-sm-4{
+  width: 120px;
+}
