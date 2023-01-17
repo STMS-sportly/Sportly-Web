@@ -28,7 +28,8 @@
   position: absolute;
   width: 447px;
   height: 69px;
-  top: 75vh;
+  top: 200px;
+  left: 60px;
   /* left: 1088px; */
   /* top: 583px; */
   color: #FFFFFF;
@@ -51,8 +52,9 @@
   position: absolute;
   width: 447px;
   height: 73px;
+  left: 60px;
+  top: 100px;
   /* left: 1088px; */
-  top: 65vh;
   color: #FFFFFF;
   background: #000000;
   border: 1px solid #000000;
@@ -63,5 +65,9 @@
   background: #FFFFFF;
   color: #000000;
   border-color: #000000;
+}
+
+.big-logo{
+  top: 50px;
 }
 
