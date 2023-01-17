@@ -25,11 +25,10 @@
   font: Mukta;
   font-size: large;
   font-weight: 100;
-  position: absolute;
+  position: relative;
   width: 447px;
   height: 69px;
-  top: 200px;
-  left: 60px;
+  top: 140px;
   /* left: 1088px; */
   /* top: 583px; */
   color: #FFFFFF;
@@ -49,10 +48,9 @@
   font: Mukta;
   font-size: large;
   font-weight: 100;
-  position: absolute;
+  position: relative;
   width: 447px;
   height: 73px;
-  left: 60px;
   top: 100px;
   /* left: 1088px; */
   color: #FFFFFF;
@@ -68,6 +66,7 @@
 }
 
 .big-logo{
+  position: relative;
   top: 50px;
 }
 
