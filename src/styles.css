@@ -506,3 +506,7 @@ html, body { height: 100%; }
   /* width: 70px; */
   color: black;
 }
+
+.mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+  color: black;
+}

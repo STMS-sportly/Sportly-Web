@@ -14,7 +14,7 @@
         <mat-card class="mat-elevation-z4">
           <div class="container">
             <div class="row">
-              <div class="col-sm-4 team-icon">
+              <div class="col-sm">
                 <div class="icon-background" [ngStyle]="{'background-color': this.teamService.getTeamIconBackgroundColor(i)}" (click)="goToTeamDetails(team.id)">
                 <div *ngIf="this.apiService.teams![i].discipline.name === 'Football'" class="icon-team">
                   <img src="../../assets/ball.png">
@@ -33,7 +33,7 @@
                 </div>
                 </div>
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm">
                 <button mat-icon-button [matMenuTriggerFor]="beforeMenu" (menuOpened)="menuAction()" (menuClosed)="menuAction()" class="tdb mdc-icon-button-teams">
                   <mat-icon>more_vert</mat-icon>
                 </button>
