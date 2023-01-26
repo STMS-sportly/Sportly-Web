@@ -9,10 +9,6 @@ import {
     setOptions
 
 } from '@mobiscroll/angular';
-import firebase from 'firebase/compat/app';
-import { map, Subscription, timer } from 'rxjs';
-import { EventDTO, TeamEvent } from '../models/event';
-import { TeamDTO } from '../models/team';
 import { ApiService } from '../services/api/api.service'
 import { TeamService } from '../services/teams/team.service';
 
@@ -20,9 +16,6 @@ setOptions({
     theme: 'ios',
     themeVariant: 'light'
 });
-
-
-
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
@@ -30,7 +23,6 @@ setOptions({
 })
 export class TeamScheduleComponent {
     constructor(
-      private notify: Notifications,
       public apiService: ApiService,
       public teamService: TeamService)
     {}
@@ -67,26 +59,20 @@ export class TeamScheduleComponent {
         onEventClick: (args) => {
             this.isEdit = true;
             this.tempEvent = args.event;
-            // fill popup form with event data
             this.loadPopupForm(args.event);
-            // set popup options
             this.popupHeaderText = 'Edit event';
             this.popupButtons = this.popupEditButtons;
             this.popupAnchor = args.domEvent.currentTarget;
-            // open the popup
             this.popup.open();
         },
         onEventCreated: (args) => {
             setTimeout(() => {
                 this.isEdit = false;
                 this.tempEvent = args.event;
-                // fill popup form with event data
                 this.loadPopupForm(args.event);
-                // set popup options
                 this.popupHeaderText = 'New Event';
                 this.popupButtons = this.popupAddButtons;
                 this.popupAnchor = args.target;
-                // open the popup
                 this.popup.open();
             });
         },
@@ -96,8 +82,6 @@ export class TeamScheduleComponent {
             });
         },
         onEventUpdated: (args) => {
-            // here you can update the event in your storage as well, after drag & drop or resize
-            // ...
         },
         onPageChange(args, inst) {
 
