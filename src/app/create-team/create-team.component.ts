@@ -26,7 +26,6 @@ export class CreateTeamComponent implements OnInit, OnDestroy {
 
   constructor(
     public apiService: ApiService,
-    private router: Router,
     private dialogRef: MatDialog,
     public teamService: TeamService,
     public spinnerService: SpinnerService,

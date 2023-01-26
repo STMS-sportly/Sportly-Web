@@ -1,8 +1,6 @@
 #validation-code-title{
   position: absolute;
 width: 100%;
-/* height: 128px; */
-/* left: 554px; */
 top: 3vh;
 
 font-family: 'Mukta';
@@ -10,7 +8,6 @@ font-style: normal;
 font-weight: 400;
 font-size: 44px;
 line-height: 100%;
-/* or 64px */
 
 text-align: center;
 

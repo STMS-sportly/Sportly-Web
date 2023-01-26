@@ -37,7 +37,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { EditTeamInfoComponent } from './edit-team-info/edit-team-info.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { ChangeRoleDialogComponent } from './change-role-dialog/change-role-dialog.component';
-// import the ScheduleModule for the Schedule component
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';

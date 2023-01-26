@@ -14,19 +14,10 @@
   margin: 0;
 }
 
-/* .actions{
-  /* margin-left: 12vw; */
-  /* bottom: 0.5vh;
-  right: 0;
-  position: absolute;
-} */
-
 .mat-mdc-icon-button.mat-mdc-button-base {
   width: 48px;
   height: 48px;
   padding: 12px;
-  /* margin-left: 7vw; */
-  /* display: inline-block; */
   margin-left: auto;
 }
 

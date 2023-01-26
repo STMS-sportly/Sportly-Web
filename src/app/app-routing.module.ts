@@ -13,14 +13,10 @@ import { UserAccountComponent } from './user-account/user-account.component';
 const routes: Routes = [
   {path: 'validationCode', component: ValidationCodeComponent},
   {path: '', component: HomePageComponent},
-  // {path: 'loginPage', component: MainPageComponent, canActivate: [AuthGuard]},
-  {path: 'loginPage', component: MainPageComponent},
-  // {path: 'loginPage', component: MainPageComponent},
-  // {path: 'createTeamPage', component: CreateTeamComponent, canActivate: [AuthGuard]},
-  {path: 'createTeamPage', component: CreateTeamComponent},
+  {path: 'loginPage', component: MainPageComponent, canActivate: [AuthGuard]},
+  {path: 'createTeamPage', component: CreateTeamComponent, canActivate: [AuthGuard]},
   {path: 'myaccount', component: UserAccountComponent, canActivate: [AuthGuard]},
-  // {path: 'team', component: TeamComponent, canActivate: [AuthGuard]},
-  {path: 'team', component: TeamComponent}
+  {path: 'team', component: TeamComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

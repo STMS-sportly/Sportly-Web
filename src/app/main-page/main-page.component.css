@@ -2,7 +2,6 @@
   position: absolute;
   width: 100%;
   height: 265px;
-  /* left: 20vh; */
   top: 231px;
 
   font-family: 'Inter';
@@ -19,7 +18,6 @@
   position: absolute;
   width: 100%;
   height: 40px;
-  /* left: 75vh; */
   top: 355px;
 
   font-family: 'Mukta';
@@ -27,7 +25,6 @@
   font-weight: 300;
   font-size: 20px;
   line-height: 100%;
-  /* or 20px */
 
   text-align: center;
 

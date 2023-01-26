@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import firebase from 'firebase/compat/app';
 import { ApiService } from '../services/api/api.service';
 import { TeamService } from '../services/teams/team.service';
 
