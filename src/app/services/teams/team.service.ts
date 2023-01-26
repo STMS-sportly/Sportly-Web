@@ -16,6 +16,7 @@ export class TeamService {
   showAdminButton: BehaviorSubject<boolean>
   public dataColor: any;
   teamAmount: number | undefined;
+  clickedTeamName: string = "";
 
   constructor(
     public apiService: ApiService
@@ -137,5 +138,10 @@ export class TeamService {
     }
     this.teamAmount = this.apiService.teams.length;
     return this.teamAmount;
+  }
+
+  getTeamName(id: number): void {
+    var teamName = this.apiService.teams?.find(x => x.id === id);
+    this.clickedTeamName = teamName?.teamName!;
   }
 }

@@ -1,10 +1,14 @@
 <div class="modal-code">
   <div class="modal-code-content">
-    <h1>Invitation code:</h1>
-    <h1>{{ this.apiService.invitationCode.code }}</h1>
-    <div class="copy-btn" (click)="copyCode()">
-      Copy
-    </div>
+    <h1 class="invitation-code-modal-header">Invitation code for:</h1>
+    <p class="invitation-code-modal-team-name">{{this.teamService.clickedTeamName}}</p>
+    <br>
+    <h1 class="invitation-code-modal-code">{{ this.apiService.invitationCode.code }}</h1>
+    <h4 class="invitation-code-modal-info">Validation code active for 60 minutes</h4>
+    <br>
+    <button class="copy-btn" (click)="copyCode()">
+      Copy to clipboard
+    </button>
   </div>
 </div>
 

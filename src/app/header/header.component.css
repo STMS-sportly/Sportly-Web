@@ -131,6 +131,7 @@
 .header-logo{
   top: 2vh;
   position: relative;
+  max-width: 85%;
 }
 
 .navbar-light .navbar-toggler {
@@ -139,5 +140,6 @@
   position: relative;
   height: 60px;
   color: black;
+  width: 15%;
 }
 

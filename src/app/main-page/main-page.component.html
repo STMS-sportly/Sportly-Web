@@ -38,7 +38,7 @@
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #beforeMenu="matMenu" xPosition="before">
-                  <button mat-menu-item class="invite-button" (click)="this.getIvitationCode(i)" *ngIf="this.teamService.isAdmin(i)">Invite</button>
+                  <button mat-menu-item class="invite-button" (click)="this.getIvitationCode(i); this.teamService.getTeamName(team.id)" *ngIf="this.teamService.isAdmin(i)">Invite</button>
                   <button mat-menu-item class="leave-button" (click)="this.leaveTeam(i)">Leave</button>
                 </mat-menu>
 

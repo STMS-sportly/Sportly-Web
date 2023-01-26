@@ -1,12 +1,34 @@
 .modal-code{
-  height: 20vh;
-  width: 20vw;
+  height: 30vh;
+  width: 30vw;
   overflow-x: hidden;
 }
 
 .modal-code-content{
-  left: 7vw;
-  top: 3vh;
   position: relative;
   overflow-x: hidden;
+  top: 4vh;
+}
+
+.invitation-code-modal-header{
+  font-size: x-large;
+  text-align: center;
+}
+
+.invitation-code-modal-team-name{
+  font-size: x-large;
+  font-weight: 500;
+  text-align: center;
+}
+
+.invitation-code-modal-code{
+  font-size: 200;
+  font-weight: 500;
+  text-align: center;
+}
+
+.invitation-code-modal-info{
+  color: lightgray;
+  text-align: center;
+  font-size: small;
 }
