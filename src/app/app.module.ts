@@ -70,7 +70,7 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
     QrCodeComponent,
     ErrorHandlerComponent
   ],
-  imports: [
+  imports: [ 
     MbscModule,
     NgbCollapseModule,
     QRCodeModule,
