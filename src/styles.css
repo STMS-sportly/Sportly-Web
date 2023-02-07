@@ -43,6 +43,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 0 auto;
   margin-top: 2vh;
   position: relative;
+  margin-left: 6vw;
 }
 
 .Row {
@@ -257,7 +258,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 6px;
   position: relative;
   display: inline-flex;
-  left: 7vw;
+  left: 6vw;
+  bottom: 1vh;
 }
 
 .copy-btn:hover{
