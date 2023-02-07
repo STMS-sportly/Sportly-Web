@@ -71,7 +71,7 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
     ErrorHandlerComponent
   ],
   imports: [ 
-    MbscModule,
+    MbscModule, 
     NgbCollapseModule,
     QRCodeModule,
     MatProgressSpinnerModule,

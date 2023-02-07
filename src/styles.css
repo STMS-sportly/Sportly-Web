@@ -494,12 +494,13 @@ html, body { height: 100%; }
   left: 60px;
 }
 
-@media (min-width: 992px){
-  .col-lg-2{
+
+.col-lg-2{
   flex: 0 0 16.6667%;
   max-width: 100%;
+  min-width: 300px;
 }
-}
+
 
 .navbar-light .navbar-toggler{
   top: 2vh;
